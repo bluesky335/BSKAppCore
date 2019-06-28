@@ -2,7 +2,7 @@
 //  BSKAppCore.h
 //  BSKAppCore
 //
-//  Created by 刘万林 on 2019/6/25.
+//  Created by BlueSky335 on 2019/6/25.
 //  Copyright © 2019 cn.liuwanlin. All rights reserved.
 //
 

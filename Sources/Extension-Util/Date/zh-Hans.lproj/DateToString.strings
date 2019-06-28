@@ -1,0 +1,12 @@
+/* 
+  DateToString.strings
+  BSKAppCore
+
+  Created by 刘万林 on 2019/6/27.
+  Copyright © 2019 cn.liuwanlin. All rights reserved.
+*/
+
+"小时以前";
+"分钟以前";
+"刚刚";
+"昨天 HH:mm";
