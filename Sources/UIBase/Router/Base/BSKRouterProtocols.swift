@@ -24,24 +24,9 @@ public protocol Routeable:class {
     ///    返回用于展示的ViewController
     var viewController:UIViewController{get}
     ///    偏好的界面展现方式,push 或者 present
-    func preferTransition() -> RouteTransitionType
+    var preferTransition:RouteTransitionType{get}
 }
 
-public extension Routeable where Self:UIViewController{
-    func preferTransition() -> RouteTransitionType{
-        return .push
-    }
-
-    var viewController:UIViewController{
-        return self
-    }
-}
-
-public extension Routeable where Self:UINavigationController{
-    func preferTransition() -> RouteTransitionType{
-        return .present
-    }
-}
 
 /// 路由器
 public protocol Router {

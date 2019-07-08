@@ -11,11 +11,22 @@ import QMUIKit
 import RxSwift
 import BSKConsole
 
-open class BSKBaseViewController: QMUICommonViewController, Routeable {
+open class BSKBaseViewController: QMUICommonViewController,Routeable {
+    
+    //    MARK: - ● Routeable
+    
     open var request: RouteRequest!
     
+    open var viewController: UIViewController{
+        return self
+    }
+    
+    open var preferTransition: RouteTransitionType{
+        return .push
+    }
+    
     /// 当作为NavigationController的rootViewController时也显示返回按钮
-    var alwaysShowNavBackButton:Bool = true
+    var alwaysShowNavBackButton:Bool = false
     
     var shouldHideKeyBoardWhenTouchBegan: Bool {
         return true

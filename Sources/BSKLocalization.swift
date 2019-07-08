@@ -12,7 +12,7 @@ open class BSKLocalization {
     var bundle:Bundle
     var table:String?
     
-    init(bundle:Bundle = .main,table:String? = nil) {
+    public init(bundle:Bundle = .main,table:String? = nil) {
         self.bundle = bundle
         self.table  = table
     }

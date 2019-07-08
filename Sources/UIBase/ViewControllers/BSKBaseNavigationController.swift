@@ -6,59 +6,67 @@
 //  Copyright © 2019 com.cloududu. All rights reserved.
 //
 
-import UIKit
 import QMUIKit
 import RxSwift
+import UIKit
 
-open class BSKBaseNavigationController: QMUINavigationController,Routeable {
-    
-    public var request: RouteRequest!
-    
+open class BSKBaseNavigationController: QMUINavigationController, Routeable {
+    //    MARK: - ● Routeable
+
+    open var request: RouteRequest!
+
+    open var viewController: UIViewController {
+        return self
+    }
+
+    open var preferTransition: RouteTransitionType {
+        return .present
+    }
+
     open lazy var disposeBag = DisposeBag()
-    
-    override open func viewDidLoad() {
+
+    open override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
-    override public init(rootViewController: UIViewController) {
+
+    public override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
         if let vc = rootViewController as? QMUINavigationControllerAppearanceDelegate {
-            self.navigationBar.tintColor = vc.navigationBarTintColor?()
-            self.navigationBar.barTintColor = vc.navigationBarTintColor?()
+            navigationBar.tintColor = vc.navigationBarTintColor?()
+            navigationBar.barTintColor = vc.navigationBarTintColor?()
         }
     }
-    
-    override public  init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+
+    public override init(nibName nibNameOrNil: String? = nil, bundle nibBundleOrNil: Bundle? = nil) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    override open var prefersStatusBarHidden: Bool{
+
+    open override var prefersStatusBarHidden: Bool {
         return self.topViewController?.prefersStatusBarHidden ?? super.prefersStatusBarHidden
     }
-    
-    override open var preferredStatusBarStyle: UIStatusBarStyle{
+
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
         return self.topViewController?.preferredStatusBarStyle ?? super.preferredStatusBarStyle
     }
-    
-    override open var preferredStatusBarUpdateAnimation: UIStatusBarAnimation{
+
+    open override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return self.topViewController?.preferredStatusBarUpdateAnimation ?? super.preferredStatusBarUpdateAnimation
     }
-    
-    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return self.topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
     }
-    
-    override open var shouldAutorotate: Bool{
+
+    open override var shouldAutorotate: Bool {
         return self.topViewController?.shouldAutorotate ?? super.shouldAutorotate
     }
-    
-    override open var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation{
-        return self.topViewController?.preferredInterfaceOrientationForPresentation ?? super.preferredInterfaceOrientationForPresentation
-    }
 
+    open override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return topViewController?.preferredInterfaceOrientationForPresentation ?? super.preferredInterfaceOrientationForPresentation
+    }
 }

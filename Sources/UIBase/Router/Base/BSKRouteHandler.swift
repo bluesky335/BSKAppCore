@@ -39,7 +39,7 @@ open class BSKRouteHandler:NSObject, RouteHandler {
 
     open func show(request: RouteRequest,targetRoute:Routeable,sourceRoute:UIViewController,complateCallBack:(()->Void)?) -> Bool {
 
-        switch targetRoute.preferTransition() {
+        switch targetRoute.preferTransition {
         case .push:
             if !targetRoute.viewController.isKind(of: UINavigationController.self) {
                 var NVC:UINavigationController? = nil
