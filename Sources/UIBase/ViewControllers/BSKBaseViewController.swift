@@ -70,7 +70,7 @@ open class BSKBaseViewController: QMUICommonViewController,Routeable {
     }
     
     override open func navigationBarShadowImage() -> UIImage? {
-        return UIImage(color: UIColor.white,size: CGSize(width: 1, height: 1))
+        return UIImage(color: UIColor.clear,size: CGSize(width: 0.5, height: 0.5))
     }
     
     override open var preferredStatusBarStyle: UIStatusBarStyle {
@@ -86,11 +86,11 @@ open class BSKBaseViewController: QMUICommonViewController,Routeable {
     }
     
     override open var supportedInterfaceOrientations: UIInterfaceOrientationMask{
-        return .portrait
+        return .all
     }
     
     override open var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation{
-        return .portrait
+        return .unknown
     }
     
     override open var prefersStatusBarHidden: Bool{
@@ -117,7 +117,7 @@ open class BSKBaseViewController: QMUICommonViewController,Routeable {
         
     }
     
-    @objc func injected(){
+    @objc open func injected(){
         BSKConsole.warning("💉注射成功->: \(self)")
         if self.responds(to: #selector(initializeUI)) {
             self.perform( #selector(initializeUI))

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BSKBaseTabbarController: UITabBarController, Routeable {
+open class BSKBaseTabbarController: UITabBarController, Routeable {
     //    MARK: - ● Routeable
 
     open var request: RouteRequest!
@@ -21,11 +21,20 @@ class BSKBaseTabbarController: UITabBarController, Routeable {
         return .push
     }
 
-    override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+        return self.selectedViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
+    }
+    
+    override open var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation{
+        return self.selectedViewController?.preferredInterfaceOrientationForPresentation ?? super.preferredInterfaceOrientationForPresentation
+    }
 
-    override var navigationItem: UINavigationItem {
+    override open var navigationItem: UINavigationItem {
         if let vc = self.selectedViewController {
             return vc.navigationItem
         }
