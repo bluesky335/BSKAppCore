@@ -12,20 +12,21 @@ public protocol BSKTopChildVC {
     var topChildVC: UIViewController? { get }
 }
 
-extension BSKExtension:BSKTopChildVC where Base : UIViewController {
-    public var topChildVC: UIViewController? {
-        return self.base.presentedViewController
+extension UIViewController:BSKTopChildVC {
+     @objc public var topChildVC: UIViewController? {
+        return self.presentedViewController
     }
 }
 
-public extension BSKExtension where Base : UINavigationController {
-    var topChildVC: UIViewController? {
-        return self.base.topViewController
+extension UINavigationController{
+    @objc override public var topChildVC: UIViewController? {
+        return self.topViewController
     }
 }
-public extension BSKExtension where Base : UITabBarController {
-    var topChildVC: UIViewController? {
-        return self.base.selectedViewController
+
+extension UITabBarController{
+    @objc override public var topChildVC: UIViewController? {
+        return self.selectedViewController
     }
 }
 
@@ -40,7 +41,7 @@ public extension BSKExtension where Base : UIApplication {
         while controllers.count != 0 {
             resultVc = controllers.removeFirst()
 
-            if let topvc = resultVc.bsk.topChildVC {
+            if let topvc = resultVc.topChildVC {
                 controllers.append(topvc)
             }
         }

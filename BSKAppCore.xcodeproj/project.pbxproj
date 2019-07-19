@@ -38,6 +38,7 @@
 		C4314B0B22C30CF6008DBCA8 /* BSKRouteMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AFF22C30CF6008DBCA8 /* BSKRouteMatcher.swift */; };
 		C4314B0C22C30CF6008DBCA8 /* BSKRouteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314B0022C30CF6008DBCA8 /* BSKRouteRequest.swift */; };
 		C4314B0F22C46325008DBCA8 /* DateToString.strings in Resources */ = {isa = PBXBuildFile; fileRef = C4314B1122C46325008DBCA8 /* DateToString.strings */; };
+		C4427DAB22DC6294007B26CE /* Array+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4427DAA22DC6294007B26CE /* Array+random.swift */; };
 		C4F5D55322C49AAD00F453AC /* Bundle+AppCoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D55222C49AAD00F453AC /* Bundle+AppCoreViewController.swift */; };
 		C4F5D57D22C5C0E300F453AC /* UIColor+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D57C22C5C0E300F453AC /* UIColor+Random.swift */; };
 		C4F5D58622C5DB4800F453AC /* BSKBaseTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D58522C5DB4800F453AC /* BSKBaseTabbarController.swift */; };
@@ -80,6 +81,7 @@
 		C4314AFF22C30CF6008DBCA8 /* BSKRouteMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSKRouteMatcher.swift; sourceTree = "<group>"; };
 		C4314B0022C30CF6008DBCA8 /* BSKRouteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSKRouteRequest.swift; sourceTree = "<group>"; };
 		C4314B1222C4632A008DBCA8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DateToString.strings"; sourceTree = "<group>"; };
+		C4427DAA22DC6294007B26CE /* Array+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+random.swift"; sourceTree = "<group>"; };
 		C4F5D55222C49AAD00F453AC /* Bundle+AppCoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppCoreViewController.swift"; sourceTree = "<group>"; };
 		C4F5D57C22C5C0E300F453AC /* UIColor+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Random.swift"; sourceTree = "<group>"; };
 		C4F5D58522C5DB4800F453AC /* BSKBaseTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKBaseTabbarController.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		C4314AB622C30CE7008DBCA8 /* Extension-Util */ = {
 			isa = PBXGroup;
 			children = (
+				C4427DA922DC627F007B26CE /* Array */,
 				C4F5D55122C49A9D00F453AC /* Bundle */,
 				C4314AD622C30CE7008DBCA8 /* Base */,
 				C4314ABA22C30CE7008DBCA8 /* UIKit */,
@@ -295,6 +298,14 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		C4427DA922DC627F007B26CE /* Array */ = {
+			isa = PBXGroup;
+			children = (
+				C4427DAA22DC6294007B26CE /* Array+random.swift */,
+			);
+			path = Array;
+			sourceTree = "<group>";
+		};
 		C4F5D55122C49A9D00F453AC /* Bundle */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,6 +448,7 @@
 				C4314AE122C30CE7008DBCA8 /* Dictionary+URL_query.swift in Sources */,
 				C4314ADE22C30CE7008DBCA8 /* Date+toString.swift in Sources */,
 				C4314ADF22C30CE7008DBCA8 /* URL+Tools.swift in Sources */,
+				C4427DAB22DC6294007B26CE /* Array+random.swift in Sources */,
 				C4314B0B22C30CF6008DBCA8 /* BSKRouteMatcher.swift in Sources */,
 				C4314B0922C30CF6008DBCA8 /* BSKRouter.swift in Sources */,
 				C4314B0222C30CF6008DBCA8 /* BSKBaseNavigationController.swift in Sources */,
