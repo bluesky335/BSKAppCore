@@ -8,6 +8,21 @@
 
 import UIKit
 
+extension Date{
+    enum Format:String{
+        
+        /// yyyy 完整的年 如：2019
+        case year = "yyyy"
+        
+        /// yy 年的后两位 如：19
+        case yearSurfix = "yy"
+        
+        /// dd 天
+        case day = "dd"
+        case hour = ""
+    }
+}
+
 public extension BSKExtension where Base == Date {
     func toString(formate: String) -> String {
         let dateFormate = DateFormatter()

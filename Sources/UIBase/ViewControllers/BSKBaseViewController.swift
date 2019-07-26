@@ -21,16 +21,12 @@ open class BSKBaseViewController: QMUICommonViewController,Routeable {
         return self
     }
     
-    open var preferTransition: RouteTransitionType{
-        return .push
-    }
+    open var preferTransition: RouteTransitionType = .push
     
     /// 当作为NavigationController的rootViewController时也显示返回按钮
-    var alwaysShowNavBackButton:Bool = false
+    open var alwaysShowNavBackButton:Bool = false
     
-    var shouldHideKeyBoardWhenTouchBegan: Bool {
-        return true
-    }
+    var shouldHideKeyBoardWhenTouchBegan: Bool = true
     
     open lazy var disposeBag = DisposeBag()
     
@@ -47,7 +43,7 @@ open class BSKBaseViewController: QMUICommonViewController,Routeable {
         self.view.backgroundColor = UIColor.white
     }
     
-    @objc func backAction(_ sender:Any){
+    @objc private func backAction(_ sender:Any){
         if self.navigationController == nil,self.presentationController != nil {
             self.dismiss(animated: true, completion: nil)
         }else if self.navigationController?.qmui_rootViewController() == self,
@@ -90,7 +86,7 @@ open class BSKBaseViewController: QMUICommonViewController,Routeable {
     }
     
     override open var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation{
-        return .unknown
+        return .portrait
     }
     
     override open var prefersStatusBarHidden: Bool{

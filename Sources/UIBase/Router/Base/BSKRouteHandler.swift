@@ -66,7 +66,7 @@ open class BSKRouteHandler:NSObject, RouteHandler {
                         })
                     }
             }else{
-                BSKConsole.warning("the targetRoute require “push” action，but itself is a NavigationController also ")
+                BSKConsole.warning("The target route require “push” action, but itself is a NavigationController also !")
                 return false
             }
         case .present:

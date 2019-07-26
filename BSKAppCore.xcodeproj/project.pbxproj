@@ -39,6 +39,7 @@
 		C4314B0C22C30CF6008DBCA8 /* BSKRouteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314B0022C30CF6008DBCA8 /* BSKRouteRequest.swift */; };
 		C4314B0F22C46325008DBCA8 /* DateToString.strings in Resources */ = {isa = PBXBuildFile; fileRef = C4314B1122C46325008DBCA8 /* DateToString.strings */; };
 		C4427DAB22DC6294007B26CE /* Array+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4427DAA22DC6294007B26CE /* Array+random.swift */; };
+		C461609122E9CDFD00F43A9C /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C461609022E9CDFD00F43A9C /* Timer.swift */; };
 		C4F5D55322C49AAD00F453AC /* Bundle+AppCoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D55222C49AAD00F453AC /* Bundle+AppCoreViewController.swift */; };
 		C4F5D57D22C5C0E300F453AC /* UIColor+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D57C22C5C0E300F453AC /* UIColor+Random.swift */; };
 		C4F5D58622C5DB4800F453AC /* BSKBaseTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D58522C5DB4800F453AC /* BSKBaseTabbarController.swift */; };
@@ -82,6 +83,7 @@
 		C4314B0022C30CF6008DBCA8 /* BSKRouteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSKRouteRequest.swift; sourceTree = "<group>"; };
 		C4314B1222C4632A008DBCA8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DateToString.strings"; sourceTree = "<group>"; };
 		C4427DAA22DC6294007B26CE /* Array+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+random.swift"; sourceTree = "<group>"; };
+		C461609022E9CDFD00F43A9C /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		C4F5D55222C49AAD00F453AC /* Bundle+AppCoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppCoreViewController.swift"; sourceTree = "<group>"; };
 		C4F5D57C22C5C0E300F453AC /* UIColor+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Random.swift"; sourceTree = "<group>"; };
 		C4F5D58522C5DB4800F453AC /* BSKBaseTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKBaseTabbarController.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		C4314AB622C30CE7008DBCA8 /* Extension-Util */ = {
 			isa = PBXGroup;
 			children = (
+				C461608F22E9CDEE00F43A9C /* Timer */,
 				C4427DA922DC627F007B26CE /* Array */,
 				C4F5D55122C49A9D00F453AC /* Bundle */,
 				C4314AD622C30CE7008DBCA8 /* Base */,
@@ -304,6 +307,14 @@
 				C4427DAA22DC6294007B26CE /* Array+random.swift */,
 			);
 			path = Array;
+			sourceTree = "<group>";
+		};
+		C461608F22E9CDEE00F43A9C /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				C461609022E9CDFD00F43A9C /* Timer.swift */,
+			);
+			path = Timer;
 			sourceTree = "<group>";
 		};
 		C4F5D55122C49A9D00F453AC /* Bundle */ = {
@@ -478,6 +489,7 @@
 				C4314B0622C30CF6008DBCA8 /* BSKAnimationHudView.swift in Sources */,
 				C4F5D55322C49AAD00F453AC /* Bundle+AppCoreViewController.swift in Sources */,
 				C4314B0C22C30CF6008DBCA8 /* BSKRouteRequest.swift in Sources */,
+				C461609122E9CDFD00F43A9C /* Timer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
