@@ -10,15 +10,19 @@ import UIKit
 
 extension Array {
 
-    /// 从数组中挑出随机的n个元素成新的数组，如果count传入0或大于数组元素数量的数则返回所有元素并打乱顺序
+    /// 从数组中挑出随机的n个元素成新的数组，如果count传入大于数组元素数量的数或者小于0则返回所有元素并打乱顺序,传入0 则返回空数组
     ///
     /// - Parameter count: 返回元素的数量
     /// - Returns: 随机之后的数组
     public func random(count:Int = 0)->Array{
+        if count == 0 {
+            return []
+        }
         var n = count
-        if n > self.count || n == 0 {
+        if n > self.count || n < 0 {
             n = self.count
         }
+        
         var array:[Element] = []
         var arrayTemp = self
         for _ in 1...n {
