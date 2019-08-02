@@ -43,7 +43,7 @@ open class BSKBaseViewController: QMUICommonViewController,Routeable {
         self.view.backgroundColor = UIColor.white
     }
     
-    @objc private func backAction(_ sender:Any){
+    @objc open func backAction(_ sender:Any){
         if self.navigationController == nil,self.presentationController != nil {
             self.dismiss(animated: true, completion: nil)
         }else if self.navigationController?.qmui_rootViewController() == self,

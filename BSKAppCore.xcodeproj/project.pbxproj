@@ -40,6 +40,8 @@
 		C4314B0F22C46325008DBCA8 /* DateToString.strings in Resources */ = {isa = PBXBuildFile; fileRef = C4314B1122C46325008DBCA8 /* DateToString.strings */; };
 		C4427DAB22DC6294007B26CE /* Array+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4427DAA22DC6294007B26CE /* Array+random.swift */; };
 		C461609122E9CDFD00F43A9C /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C461609022E9CDFD00F43A9C /* Timer.swift */; };
+		C46C658E22F1D85A0014F74B /* BSKRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */; };
+		C46C659022F27CFF0014F74B /* BSKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C658F22F27CFF0014F74B /* BSKButton.swift */; };
 		C4F5D55322C49AAD00F453AC /* Bundle+AppCoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D55222C49AAD00F453AC /* Bundle+AppCoreViewController.swift */; };
 		C4F5D57D22C5C0E300F453AC /* UIColor+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D57C22C5C0E300F453AC /* UIColor+Random.swift */; };
 		C4F5D58622C5DB4800F453AC /* BSKBaseTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D58522C5DB4800F453AC /* BSKBaseTabbarController.swift */; };
@@ -84,6 +86,8 @@
 		C4314B1222C4632A008DBCA8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DateToString.strings"; sourceTree = "<group>"; };
 		C4427DAA22DC6294007B26CE /* Array+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+random.swift"; sourceTree = "<group>"; };
 		C461609022E9CDFD00F43A9C /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKRadioButton.swift; sourceTree = "<group>"; };
+		C46C658F22F27CFF0014F74B /* BSKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKButton.swift; sourceTree = "<group>"; };
 		C4F5D55222C49AAD00F453AC /* Bundle+AppCoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppCoreViewController.swift"; sourceTree = "<group>"; };
 		C4F5D57C22C5C0E300F453AC /* UIColor+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Random.swift"; sourceTree = "<group>"; };
 		C4F5D58522C5DB4800F453AC /* BSKBaseTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKBaseTabbarController.swift; sourceTree = "<group>"; };
@@ -268,6 +272,8 @@
 			children = (
 				C4314AF622C30CF6008DBCA8 /* BSKErrorView.swift */,
 				C4314AF722C30CF6008DBCA8 /* BSKAnimationHudView.swift */,
+				C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */,
+				C46C658F22F27CFF0014F74B /* BSKButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -470,6 +476,7 @@
 				C4314AD822C30CE7008DBCA8 /* BSKUtils.swift in Sources */,
 				C4F5D57D22C5C0E300F453AC /* UIColor+Random.swift in Sources */,
 				C4314B0722C30CF6008DBCA8 /* BSKRoute.swift in Sources */,
+				C46C658E22F1D85A0014F74B /* BSKRadioButton.swift in Sources */,
 				C4314AE722C30CE7008DBCA8 /* String+Size.swift in Sources */,
 				C4F5D58622C5DB4800F453AC /* BSKBaseTabbarController.swift in Sources */,
 				C4314AE522C30CE7008DBCA8 /* String+Random.swift in Sources */,
@@ -489,6 +496,7 @@
 				C4314B0622C30CF6008DBCA8 /* BSKAnimationHudView.swift in Sources */,
 				C4F5D55322C49AAD00F453AC /* Bundle+AppCoreViewController.swift in Sources */,
 				C4314B0C22C30CF6008DBCA8 /* BSKRouteRequest.swift in Sources */,
+				C46C659022F27CFF0014F74B /* BSKButton.swift in Sources */,
 				C461609122E9CDFD00F43A9C /* Timer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
