@@ -42,6 +42,7 @@
 		C461609122E9CDFD00F43A9C /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C461609022E9CDFD00F43A9C /* Timer.swift */; };
 		C46C658E22F1D85A0014F74B /* BSKRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */; };
 		C46C659022F27CFF0014F74B /* BSKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C658F22F27CFF0014F74B /* BSKButton.swift */; };
+		C4C00C8622F6E9BC00FE2CCD /* BSKCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C00C8522F6E9BC00FE2CCD /* BSKCheckButton.swift */; };
 		C4F5D55322C49AAD00F453AC /* Bundle+AppCoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D55222C49AAD00F453AC /* Bundle+AppCoreViewController.swift */; };
 		C4F5D57D22C5C0E300F453AC /* UIColor+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D57C22C5C0E300F453AC /* UIColor+Random.swift */; };
 		C4F5D58622C5DB4800F453AC /* BSKBaseTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D58522C5DB4800F453AC /* BSKBaseTabbarController.swift */; };
@@ -88,6 +89,7 @@
 		C461609022E9CDFD00F43A9C /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKRadioButton.swift; sourceTree = "<group>"; };
 		C46C658F22F27CFF0014F74B /* BSKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKButton.swift; sourceTree = "<group>"; };
+		C4C00C8522F6E9BC00FE2CCD /* BSKCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKCheckButton.swift; sourceTree = "<group>"; };
 		C4F5D55222C49AAD00F453AC /* Bundle+AppCoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppCoreViewController.swift"; sourceTree = "<group>"; };
 		C4F5D57C22C5C0E300F453AC /* UIColor+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Random.swift"; sourceTree = "<group>"; };
 		C4F5D58522C5DB4800F453AC /* BSKBaseTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKBaseTabbarController.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				C4314AF722C30CF6008DBCA8 /* BSKAnimationHudView.swift */,
 				C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */,
 				C46C658F22F27CFF0014F74B /* BSKButton.swift */,
+				C4C00C8522F6E9BC00FE2CCD /* BSKCheckButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				C4314AE822C30CE7008DBCA8 /* String+URL.swift in Sources */,
 				C4314AE622C30CE7008DBCA8 /* String+SubStringRange.swift in Sources */,
 				C4314AE422C30CE7008DBCA8 /* String+RegularExpression.swift in Sources */,
+				C4C00C8622F6E9BC00FE2CCD /* BSKCheckButton.swift in Sources */,
 				C4314B0122C30CF6008DBCA8 /* BSKBaseViewController.swift in Sources */,
 				C4314AEC22C30CE7008DBCA8 /* String+Attribute.swift in Sources */,
 				C4314B0622C30CF6008DBCA8 /* BSKAnimationHudView.swift in Sources */,
