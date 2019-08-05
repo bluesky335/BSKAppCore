@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class BSKRadioButton: UIButton {
+open class BSKRadioButton: BSKButton {
     
     open var groupId:Int = 0
     

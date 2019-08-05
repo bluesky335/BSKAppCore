@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class BSKCheckButton: UIButton {
+open class BSKCheckButton: BSKButton {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
