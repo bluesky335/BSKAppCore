@@ -86,6 +86,7 @@
 		C4314B0022C30CF6008DBCA8 /* BSKRouteRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSKRouteRequest.swift; sourceTree = "<group>"; };
 		C4314B1222C4632A008DBCA8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DateToString.strings"; sourceTree = "<group>"; };
 		C4427DAA22DC6294007B26CE /* Array+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+random.swift"; sourceTree = "<group>"; };
+		C44D40FF22FE7C1200067A36 /* BSKAppCore.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BSKAppCore.podspec; sourceTree = "<group>"; };
 		C461609022E9CDFD00F43A9C /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKRadioButton.swift; sourceTree = "<group>"; };
 		C46C658F22F27CFF0014F74B /* BSKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKButton.swift; sourceTree = "<group>"; };
@@ -120,6 +121,7 @@
 		C4314AA022C22EE7008DBCA8 = {
 			isa = PBXGroup;
 			children = (
+				C44D40FF22FE7C1200067A36 /* BSKAppCore.podspec */,
 				C4314AAC22C22EE7008DBCA8 /* Sources */,
 				C4314AAB22C22EE7008DBCA8 /* Products */,
 				DD5474702823CC13E6EB39F5 /* Pods */,
