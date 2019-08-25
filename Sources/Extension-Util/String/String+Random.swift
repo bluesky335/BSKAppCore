@@ -19,8 +19,8 @@ public extension BSKExtension where Base == String {
         return randomString
     }
 
-    static func random(length: Int, in Characters: String) -> String {
-        let letters = Characters
+    func random(length: Int) -> String {
+        let letters = self.base
         let len = UInt32(letters.count)
         var randomString = ""
         for _ in 0 ..< length {
