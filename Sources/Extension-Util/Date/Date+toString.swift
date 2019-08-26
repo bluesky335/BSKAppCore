@@ -30,6 +30,11 @@ public extension BSKExtension where Base == Date {
         return dateFormate.string(from: base)
     }
 
+    /// "20190608123400"
+    func toPureNumberString()->String{
+        return self.toString(formate: "yyyyMMddHHmmss")
+    }
+    
     func toString() -> String {
         var bundle:Bundle = .main
         if let bundlePath = Bundle.bsk.appCore.path(forResource: "LocalizationString", ofType: "bundle"){

@@ -8,9 +8,9 @@
 
 import UIKit
 
-class BSKUtils: NSObject {
+public class BSKUtils: NSObject {
 
-    static func getImageType(data:Data)->String{
+    public static func getImageType(data:Data)->String{
         
         let int = data.withUnsafeBytes({ (p) -> UInt8 in
             return p.load(as: UInt8.self)
@@ -41,7 +41,7 @@ class BSKUtils: NSObject {
         }
     }
     
-    static func getImageSuffix(data:Data)->String?{
+    public static func getImageSuffix(data:Data)->String?{
         let int = data.withUnsafeBytes({ (p) -> UInt8 in
             return p.load(as: UInt8.self)
         })
@@ -71,7 +71,7 @@ class BSKUtils: NSObject {
         }
     }
     
-    static func runOnMainThread(_ block:@escaping ()->Void){
+    public static func runOnMainThread(_ block:@escaping ()->Void){
         if Thread.isMainThread {
             block()
         }else{
