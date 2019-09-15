@@ -26,6 +26,7 @@ extension Date{
 public extension BSKExtension where Base == Date {
     func toString(formate: String) -> String {
         let dateFormate = DateFormatter()
+        dateFormate.locale = Locale.current
         dateFormate.dateFormat = formate
         return dateFormate.string(from: base)
     }
@@ -45,6 +46,7 @@ public extension BSKExtension where Base == Date {
         
         let calendar = Calendar.current
         let dateFormate = DateFormatter()
+        dateFormate.locale = Locale.current
         if calendar.isDateInToday(base) {
             // 今天
             let compoents = Calendar.current.dateComponents([.minute, .hour, .second], from: base, to: Date())

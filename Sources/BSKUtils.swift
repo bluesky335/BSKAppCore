@@ -78,4 +78,26 @@ public class BSKUtils: NSObject {
             DispatchQueue.main.async(execute: block)
         }
     }
+
+    public static func Fen2Yuan(fen:String)->String?{
+        guard
+            let fen = Decimal(string: fen),
+            let hundred = Decimal(string: "100")
+        else {
+            return nil
+        }
+        let yuan = fen/hundred
+        return yuan.description
+    }
+
+    public static func Yuan2Fen(yuan:String)->String?{
+        guard
+            let yuan = Decimal(string: yuan),
+            let hundred = Decimal(string: "100")
+            else {
+                return nil
+        }
+        let fen = yuan*hundred
+        return fen.description
+    }
 }
