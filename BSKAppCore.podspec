@@ -21,7 +21,10 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/onevcat/Kingfisher.git", :tag => s.version }
   s.source_files  = ["Sources/**/*.swift", "Sources/BSKAppCore.h"]
-  s.resource_bundles = { 'LocalizationString' => ["Sources/**/*.strings"]}
+  s.resource_bundles = {
+    'LocalizationString' => ["Sources/**/*.strings"],
+    'JsonFiles' => ["Sources/**/*.json"]
+}
   s.public_header_files = ["Sources/BSKAppCore.h"]
   s.requires_arc = true
 

@@ -36,18 +36,14 @@ public extension BSKExtension where Base == Date {
     }
     
     func toString() -> String {
-        var bundle:Bundle = .main
-        if let bundlePath = Bundle.bsk.appCore.path(forResource: "LocalizationString", ofType: "bundle"){
-            bundle = Bundle(path: bundlePath) ?? .main
-        }
         
-        let local = BSKLocalization(bundle: bundle, table: "DateToString")
+        let local = BSKLocalization.getLocalStr(table:"DateToString")
         
         let calendar = Calendar.current
         let dateFormate = DateFormatter()
         if calendar.isDateInToday(base) {
             // 今天
-            let compoents = Calendar.current.dateComponents([.minute, .hour, .second], from: base, to: Date())
+            let compoents = Calendar.current.dateComponents([.minute, .hour, .second], from: Date(), to: base)
             if let h = compoents.hour, h > 0 {
                 // 一小时以上
                 return "\(h)\(local.localStr(key: "小时以前"))"

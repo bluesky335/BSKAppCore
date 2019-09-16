@@ -1,0 +1,13 @@
+/* 
+  Navigation.strings
+  BSKAppCore
+
+  Created by 刘万林 on 2019/9/2.
+  Copyright © 2019 cn.liuwanlin. All rights reserved.
+*/
+
+"Navigation_to"="Navigation to";
+"Navigation_AppleMap"="Apple Map";
+"Navigation_GoogleMap"="Google Map";
+"Navigation_Amap"="Autonavi";
+"Navigation_TencentMap"="Tencent Map";

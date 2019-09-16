@@ -42,7 +42,14 @@
 		C461609122E9CDFD00F43A9C /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C461609022E9CDFD00F43A9C /* Timer.swift */; };
 		C46C658E22F1D85A0014F74B /* BSKRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */; };
 		C46C659022F27CFF0014F74B /* BSKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C658F22F27CFF0014F74B /* BSKButton.swift */; };
+		C4829CFC231CF00100769832 /* PHAsset+outVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4829CFB231CF00100769832 /* PHAsset+outVideo.swift */; };
+		C4829D05231D4DF400769832 /* BSKNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4829D04231D4DF400769832 /* BSKNavigation.swift */; };
+		C4829D08231D503100769832 /* Navigation.strings in Resources */ = {isa = PBXBuildFile; fileRef = C4829D0A231D503100769832 /* Navigation.strings */; };
+		C4829D1A231E494E00769832 /* JZAreaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4829D17231E494D00769832 /* JZAreaManager.swift */; };
+		C4829D1B231E494E00769832 /* JZLocationConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4829D18231E494D00769832 /* JZLocationConverter.swift */; };
+		C4829D1C231E494E00769832 /* GCJ02.json in Resources */ = {isa = PBXBuildFile; fileRef = C4829D19231E494D00769832 /* GCJ02.json */; };
 		C4C00C8622F6E9BC00FE2CCD /* BSKCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C00C8522F6E9BC00FE2CCD /* BSKCheckButton.swift */; };
+		C4C88ED32317C17B0054C6F4 /* Data+string.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C88ED22317C17B0054C6F4 /* Data+string.swift */; };
 		C4F5D55322C49AAD00F453AC /* Bundle+AppCoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D55222C49AAD00F453AC /* Bundle+AppCoreViewController.swift */; };
 		C4F5D57D22C5C0E300F453AC /* UIColor+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D57C22C5C0E300F453AC /* UIColor+Random.swift */; };
 		C4F5D58622C5DB4800F453AC /* BSKBaseTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D58522C5DB4800F453AC /* BSKBaseTabbarController.swift */; };
@@ -90,7 +97,15 @@
 		C461609022E9CDFD00F43A9C /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKRadioButton.swift; sourceTree = "<group>"; };
 		C46C658F22F27CFF0014F74B /* BSKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKButton.swift; sourceTree = "<group>"; };
+		C4829CFB231CF00100769832 /* PHAsset+outVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PHAsset+outVideo.swift"; sourceTree = "<group>"; };
+		C4829D04231D4DF400769832 /* BSKNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKNavigation.swift; sourceTree = "<group>"; };
+		C4829D09231D503100769832 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Navigation.strings"; sourceTree = "<group>"; };
+		C4829D0C231D50D400769832 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Navigation.strings; sourceTree = "<group>"; };
+		C4829D17231E494D00769832 /* JZAreaManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JZAreaManager.swift; sourceTree = "<group>"; };
+		C4829D18231E494D00769832 /* JZLocationConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JZLocationConverter.swift; sourceTree = "<group>"; };
+		C4829D19231E494D00769832 /* GCJ02.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GCJ02.json; sourceTree = "<group>"; };
 		C4C00C8522F6E9BC00FE2CCD /* BSKCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKCheckButton.swift; sourceTree = "<group>"; };
+		C4C88ED22317C17B0054C6F4 /* Data+string.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+string.swift"; sourceTree = "<group>"; };
 		C4F5D55222C49AAD00F453AC /* Bundle+AppCoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppCoreViewController.swift"; sourceTree = "<group>"; };
 		C4F5D57C22C5C0E300F453AC /* UIColor+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Random.swift"; sourceTree = "<group>"; };
 		C4F5D58522C5DB4800F453AC /* BSKBaseTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKBaseTabbarController.swift; sourceTree = "<group>"; };
@@ -142,6 +157,7 @@
 			children = (
 				C4314AB722C30CE7008DBCA8 /* BSKUtils.swift */,
 				C426CCD022C48F8F00F6B982 /* BSKLocalization.swift */,
+				C4829D03231D4DE700769832 /* MapTool */,
 				C4314AEE22C30CF6008DBCA8 /* UIBase */,
 				C4314AB622C30CE7008DBCA8 /* Extension-Util */,
 				C4314AAD22C22EE7008DBCA8 /* BSKAppCore.h */,
@@ -153,6 +169,8 @@
 		C4314AB622C30CE7008DBCA8 /* Extension-Util */ = {
 			isa = PBXGroup;
 			children = (
+				C4829CFA231CF00100769832 /* Photos */,
+				C4C88ED12317C12F0054C6F4 /* Data */,
 				C461608F22E9CDEE00F43A9C /* Timer */,
 				C4427DA922DC627F007B26CE /* Array */,
 				C4F5D55122C49A9D00F453AC /* Bundle */,
@@ -328,6 +346,42 @@
 			path = Timer;
 			sourceTree = "<group>";
 		};
+		C4829CFA231CF00100769832 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				C4829CFB231CF00100769832 /* PHAsset+outVideo.swift */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
+		C4829D03231D4DE700769832 /* MapTool */ = {
+			isa = PBXGroup;
+			children = (
+				C4829D16231E493C00769832 /* JZLocation */,
+				C4829D04231D4DF400769832 /* BSKNavigation.swift */,
+				C4829D0A231D503100769832 /* Navigation.strings */,
+			);
+			path = MapTool;
+			sourceTree = "<group>";
+		};
+		C4829D16231E493C00769832 /* JZLocation */ = {
+			isa = PBXGroup;
+			children = (
+				C4829D19231E494D00769832 /* GCJ02.json */,
+				C4829D17231E494D00769832 /* JZAreaManager.swift */,
+				C4829D18231E494D00769832 /* JZLocationConverter.swift */,
+			);
+			path = JZLocation;
+			sourceTree = "<group>";
+		};
+		C4C88ED12317C12F0054C6F4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C4C88ED22317C17B0054C6F4 /* Data+string.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		C4F5D55122C49A9D00F453AC /* Bundle */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +485,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4829D08231D503100769832 /* Navigation.strings in Resources */,
+				C4829D1C231E494E00769832 /* GCJ02.json in Resources */,
 				C4314B0F22C46325008DBCA8 /* DateToString.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,13 +551,18 @@
 				C4314B0522C30CF6008DBCA8 /* BSKErrorView.swift in Sources */,
 				C4314AE822C30CE7008DBCA8 /* String+URL.swift in Sources */,
 				C4314AE622C30CE7008DBCA8 /* String+SubStringRange.swift in Sources */,
+				C4C88ED32317C17B0054C6F4 /* Data+string.swift in Sources */,
 				C4314AE422C30CE7008DBCA8 /* String+RegularExpression.swift in Sources */,
+				C4829CFC231CF00100769832 /* PHAsset+outVideo.swift in Sources */,
 				C4C00C8622F6E9BC00FE2CCD /* BSKCheckButton.swift in Sources */,
 				C4314B0122C30CF6008DBCA8 /* BSKBaseViewController.swift in Sources */,
+				C4829D1B231E494E00769832 /* JZLocationConverter.swift in Sources */,
+				C4829D1A231E494E00769832 /* JZAreaManager.swift in Sources */,
 				C4314AEC22C30CE7008DBCA8 /* String+Attribute.swift in Sources */,
 				C4314B0622C30CF6008DBCA8 /* BSKAnimationHudView.swift in Sources */,
 				C4F5D55322C49AAD00F453AC /* Bundle+AppCoreViewController.swift in Sources */,
 				C4314B0C22C30CF6008DBCA8 /* BSKRouteRequest.swift in Sources */,
+				C4829D05231D4DF400769832 /* BSKNavigation.swift in Sources */,
 				C46C659022F27CFF0014F74B /* BSKButton.swift in Sources */,
 				C461609122E9CDFD00F43A9C /* Timer.swift in Sources */,
 			);
@@ -517,6 +578,15 @@
 				C426CCCD22C4699D00F6B982 /* en */,
 			);
 			name = DateToString.strings;
+			sourceTree = "<group>";
+		};
+		C4829D0A231D503100769832 /* Navigation.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C4829D09231D503100769832 /* zh-Hans */,
+				C4829D0C231D50D400769832 /* en */,
+			);
+			name = Navigation.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

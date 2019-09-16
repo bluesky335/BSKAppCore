@@ -12,7 +12,6 @@ fileprivate let appcoreBundle = Bundle.init(for: BSKUtils.self)
 
 extension BSKExtension where Base:Bundle{
     class var appCore:Bundle {
-        [1,2,3,4,5].randomElement()
         return appcoreBundle
     }
 }
