@@ -7,7 +7,10 @@
 */
 
 "Navigation_to"="Navigation to";
-"Navigation_AppleMap"="Apple Map";
-"Navigation_GoogleMap"="Google Map";
-"Navigation_Amap"="Autonavi";
-"Navigation_TencentMap"="Tencent Map";
+"Navigation_AppleMap"="Apple Maps";
+"Navigation_GoogleMap"="Google Maps";
+"Navigation_Amap"="Autonavi Maps";
+"Navigation_TencentMap"="Tencent Maps";
+"Navigation_BaiduMap"="BaiDu Maps";
+"Navigation_MyLocation"="My location";
+"Navigation_Cancell"="Cancel";

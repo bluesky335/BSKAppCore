@@ -7,7 +7,10 @@
 */
 
 "Navigation_to"="导航";
-"lo"="苹果地图";
+"Navigation_AppleMap"="苹果地图";
 "Navigation_GoogleMap"="谷歌地图";
 "Navigation_Amap"="高德地图";
 "Navigation_TencentMap"="腾讯地图";
+"Navigation_BaiduMap"="百度地图";
+"Navigation_MyLocation"="我的位置";
+"Navigation_Cancell"="取消";

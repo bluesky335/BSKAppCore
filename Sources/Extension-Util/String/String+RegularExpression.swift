@@ -128,14 +128,6 @@ public extension BSKExtension where Base == String {
         }
         return nil
     }
-
-    
-    var int64Value:Int64?{
-        if self.isIntNumber {
-            return Int64(self.base)
-        }
-        return nil
-    }
     
     var floatValue:Float?{
         if self.isNumber {

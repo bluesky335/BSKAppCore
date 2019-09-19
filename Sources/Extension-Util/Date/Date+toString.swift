@@ -43,27 +43,42 @@ public extension BSKExtension where Base == Date {
         let calendar = Calendar.current
         let dateFormate = DateFormatter()
         dateFormate.locale = Locale.current
+        
+        let now = Date()
+        
         if calendar.isDateInToday(base) {
             // 今天
-            let compoents = Calendar.current.dateComponents([.minute, .hour, .second], from: Date(), to: base)
-            if let h = compoents.hour, h > 0 {
-                // 一小时以上
-                return "\(h)\(local.localStr(key: "小时以前"))"
-            } else {
-                // 一小时以内
-                if let m = compoents.minute, m > 0 {
-                    return "\(m)\(local.localStr(key:"分钟以前"))"
-                }else{
-                    return local.localStr(key: "刚刚")
+            let compoents = Calendar.current.dateComponents([.minute, .hour, .second], from:now , to:base )
+            if self.base < now {
+             
+                if let h = compoents.hour, h < 0 {
+                    // 一小时以上
+                    return "\(abs(h))\(local.localStr(key: "小时以前"))"
+                } else {
+                    // 一小时以内
+                    if let m = compoents.minute, m < 0 {
+                        return "\(abs(m))\(local.localStr(key:"分钟以前"))"
+                    }else{
+                        return local.localStr(key: "刚刚")
+                    }
                 }
+            }else{
+                // 今天
+                dateFormate.dateFormat = local.localStr(key: "HH:mm")
+                return dateFormate.string(from: self.base)
             }
         } else if calendar.isDateInYesterday(base) {
             // 昨天
             dateFormate.dateFormat = local.localStr(key: "昨天 HH:mm") 
             return dateFormate.string(from: self.base)
-        } else {
+        } else if calendar.isDateInTomorrow(base) {
+            // 明天
+            dateFormate.dateFormat = local.localStr(key: "明天 HH:mm")
+            return dateFormate.string(from: self.base)
+        }
+        else{
             let compoents = calendar.dateComponents([.year, .month, .day], from: base, to: Date())
-            if compoents.year ?? 0 > 0 {
+            if abs(compoents.year ?? 0 ) > 0 {
                 // 超过一年
                 dateFormate.dateFormat = "yyyy-MM-dd"
                 return dateFormate.string(from: self.base)
