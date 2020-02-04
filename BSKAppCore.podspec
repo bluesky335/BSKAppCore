@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   
   s.ios.deployment_target = "10.0"
 
-  s.source       = { :git => "https://github.com/onevcat/Kingfisher.git", :tag => s.version }
+  s.source       = { :git => "https://github.com/bluesky335/BSKAppCore.git", :tag => s.version }
   s.source_files  = ["Sources/**/*.swift", "Sources/BSKAppCore.h"]
   s.resource_bundles = {
     'LocalizationString' => ["Sources/**/*.strings"],
