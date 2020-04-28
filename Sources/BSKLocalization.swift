@@ -6,7 +6,7 @@
 //  Copyright © 2019 cn.liuwanlin. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 internal func ResourceBundle(for resource: String) -> Bundle {
     var bundle: Bundle = .main

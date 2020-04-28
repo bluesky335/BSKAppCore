@@ -40,6 +40,7 @@
 		C4314B0F22C46325008DBCA8 /* DateToString.strings in Resources */ = {isa = PBXBuildFile; fileRef = C4314B1122C46325008DBCA8 /* DateToString.strings */; };
 		C4427DAB22DC6294007B26CE /* Array+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4427DAA22DC6294007B26CE /* Array+random.swift */; };
 		C461609122E9CDFD00F43A9C /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C461609022E9CDFD00F43A9C /* Timer.swift */; };
+		C46211422456BF04007B7FDF /* Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46211412456BF04007B7FDF /* Hash.swift */; };
 		C46C658E22F1D85A0014F74B /* BSKRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */; };
 		C46C659022F27CFF0014F74B /* BSKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C658F22F27CFF0014F74B /* BSKButton.swift */; };
 		C4829CFC231CF00100769832 /* PHAsset+outVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4829CFB231CF00100769832 /* PHAsset+outVideo.swift */; };
@@ -95,6 +96,7 @@
 		C4427DAA22DC6294007B26CE /* Array+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+random.swift"; sourceTree = "<group>"; };
 		C44D40FF22FE7C1200067A36 /* BSKAppCore.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BSKAppCore.podspec; sourceTree = "<group>"; };
 		C461609022E9CDFD00F43A9C /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		C46211412456BF04007B7FDF /* Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hash.swift; sourceTree = "<group>"; };
 		C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKRadioButton.swift; sourceTree = "<group>"; };
 		C46C658F22F27CFF0014F74B /* BSKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKButton.swift; sourceTree = "<group>"; };
 		C4829CFB231CF00100769832 /* PHAsset+outVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PHAsset+outVideo.swift"; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 		C4314AAC22C22EE7008DBCA8 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				C46211402456BEF5007B7FDF /* Utils */,
 				C4314AB722C30CE7008DBCA8 /* BSKUtils.swift */,
 				C426CCD022C48F8F00F6B982 /* BSKLocalization.swift */,
 				C4829D03231D4DE700769832 /* MapTool */,
@@ -344,6 +347,14 @@
 				C461609022E9CDFD00F43A9C /* Timer.swift */,
 			);
 			path = Timer;
+			sourceTree = "<group>";
+		};
+		C46211402456BEF5007B7FDF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C46211412456BF04007B7FDF /* Hash.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		C4829CFA231CF00100769832 /* Photos */ = {
@@ -557,6 +568,7 @@
 				C4C00C8622F6E9BC00FE2CCD /* BSKCheckButton.swift in Sources */,
 				C4314B0122C30CF6008DBCA8 /* BSKBaseViewController.swift in Sources */,
 				C4829D1B231E494E00769832 /* JZLocationConverter.swift in Sources */,
+				C46211422456BF04007B7FDF /* Hash.swift in Sources */,
 				C4829D1A231E494E00769832 /* JZAreaManager.swift in Sources */,
 				C4314AEC22C30CE7008DBCA8 /* String+Attribute.swift in Sources */,
 				C4314B0622C30CF6008DBCA8 /* BSKAnimationHudView.swift in Sources */,
