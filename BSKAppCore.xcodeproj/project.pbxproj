@@ -60,6 +60,7 @@
 /* Begin PBXFileReference section */
 		1F46C1E8BB628D57FAD1E660 /* Pods_BSKAppCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BSKAppCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD79180DC89377F217C46333 /* Pods-BSKAppCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSKAppCore.debug.xcconfig"; path = "Target Support Files/Pods-BSKAppCore/Pods-BSKAppCore.debug.xcconfig"; sourceTree = "<group>"; };
+		C41865EC2457D6F500E033C6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C426CCCD22C4699D00F6B982 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DateToString.strings; sourceTree = "<group>"; };
 		C426CCD022C48F8F00F6B982 /* BSKLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BSKLocalization.swift; path = Sources/BSKLocalization.swift; sourceTree = SOURCE_ROOT; };
 		C4314AAA22C22EE7008DBCA8 /* BSKAppCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BSKAppCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +139,7 @@
 		C4314AA022C22EE7008DBCA8 = {
 			isa = PBXGroup;
 			children = (
+				C41865EC2457D6F500E033C6 /* README.md */,
 				C44D40FF22FE7C1200067A36 /* BSKAppCore.podspec */,
 				C4314AAC22C22EE7008DBCA8 /* Sources */,
 				C4314AAB22C22EE7008DBCA8 /* Products */,
