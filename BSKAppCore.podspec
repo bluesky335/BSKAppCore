@@ -29,10 +29,10 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
 
-  s.dependency 'BSKNetwork'
-  s.dependency 'BSKConsole'
+  s.dependency 'BSKNetwork','~> 0.1.5.2'
+  s.dependency 'BSKConsole','~> 0.1.0'
   s.dependency 'SnapKit'
-  s.dependency 'QMUIKit'
+  s.dependency 'QMUIKit','~> 4.0.2'
   s.dependency 'RxSwift'
   s.dependency 'RxCocoa'
   

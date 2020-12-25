@@ -33,7 +33,7 @@ open class BSKBaseViewController: QMUICommonViewController,Routeable {
     override open func viewDidLoad() {
         super.viewDidLoad()
         if alwaysShowNavBackButton {
-            if self.navigationController?.qmui_rootViewController() == self {
+            if self.navigationController?.qmui_rootViewController == self {
                 let fixedSpace = UIBarButtonItem.qmui_fixedSpaceItem(withWidth: 0)
                 let backButton = UIBarButtonItem.qmui_back(withTarget: self,
                                                            action: #selector(backAction(_:)))
@@ -46,7 +46,7 @@ open class BSKBaseViewController: QMUICommonViewController,Routeable {
     @objc open func backAction(_ sender:Any){
         if self.navigationController == nil,self.presentationController != nil {
             self.dismiss(animated: true, completion: nil)
-        }else if self.navigationController?.qmui_rootViewController() == self,
+        }else if self.navigationController?.qmui_rootViewController == self,
             self.navigationController?.presentationController != nil{
             self.navigationController?.dismiss(animated: true, completion: nil)
         }else{
