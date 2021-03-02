@@ -7,12 +7,11 @@
 //
 
 import MapKit
-import QMUIKit
 import UIKit
 
-fileprivate let local = BSKLocalization.getLocalStr(table: "Navigation")
+fileprivate let local = BSKLocalization(bundle:Bundle(for: MapNavigation.self), table: "Navigation")
 
-public class BSKNavigation {
+public class MapNavigation {
     public enum MapApp: String, CaseIterable {
         case apple = "Navigation_AppleMap"
         case amap = "Navigation_Amap"

@@ -9,62 +9,67 @@
 import UIKit
 
 open class BSKButton: UIButton {
+    
+    private var fontDic: [UIControl.State.RawValue: UIFont] = [:]
+    private var bgColorDic: [UIControl.State.RawValue: UIColor] = [:]
 
-//     TODO: 完成不同状态下的字体
-    private var fontDic:[UIControl.State.RawValue:UIFont] = [:]
-    private var bgColorDic:[UIControl.State.RawValue:UIColor] = [:]
-
-    open func setTitleFount(_ fount:UIFont,for state:UIControl.State){
+    open func setTitleFount(_ fount: UIFont, for state: UIControl.State) {
         fontDic[state.rawValue] = fount
         checkState()
     }
-    open func setBackgroundColor(_ color:UIColor,for state:UIControl.State){
+
+    open func titleFont(for state: UIControl.State) -> UIFont? {
+        return fontDic[state.rawValue]
+    }
+
+    open func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         bgColorDic[state.rawValue] = color
         checkState()
     }
-    
-    private func checkState(){
-        if let font = self.fontDic[self.state.rawValue] {
-            self.titleLabel?.font = font
+
+    open func backgroundColor(for state: UIControl.State) -> UIColor? {
+        return bgColorDic[state.rawValue]
+    }
+
+    private func checkState() {
+        if let font = fontDic[state.rawValue] {
+            titleLabel?.font = font
         }
-        if let color = self.bgColorDic[self.state.rawValue] {
-            self.backgroundColor = color
+        if let color = bgColorDic[state.rawValue] {
+            backgroundColor = color
         }
     }
-    
-    open override var isSelected: Bool{
-        didSet{
+
+    override open var isSelected: Bool {
+        didSet {
             self.checkState()
         }
     }
-    
-    open override var isHighlighted: Bool{
-        didSet{
+
+    override open var isHighlighted: Bool {
+        didSet {
             self.checkState()
         }
     }
-    
-    open override var isEnabled: Bool{
-        didSet{
+
+    override open var isEnabled: Bool {
+        didSet {
             self.checkState()
         }
     }
-    
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        self.checkState()
+        checkState()
     }
-    
-    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+    override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        self.checkState()
+        checkState()
     }
-    
-    open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+    override open func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        self.checkState()
+        checkState()
     }
-
-
-
 }

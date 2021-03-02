@@ -6,24 +6,21 @@
 //  Copyright © 2018年 ChaungMiKeJi. All rights reserved.
 //
 
-import UIKit
 import BSKConsole
-import QMUIKit
+import UIKit
 
-open class BSKRouteHandler:NSObject, RouteHandler {
-
+open class BSKRouteHandler: NSObject, RouteHandler {
     open func shouldHandle(request: RouteRequest) -> Bool {
         return true
     }
-    
-    open func handle(request: RouteRequest, complateCallBack:(()->Void)?)  -> Bool {
 
+    open func handle(request: RouteRequest, complateCallBack: (() -> Void)?) -> Bool {
         guard shouldHandle(request: request) else {
             BSKConsole.warning("shouldHandle(request:) -> false")
             return false
         }
 
-        guard let sourceRoute = source(for: request) else{
+        guard let sourceRoute = source(for: request) else {
             BSKConsole.warning("路由失败：sourceRoute为空")
             return false
         }
@@ -34,44 +31,41 @@ open class BSKRouteHandler:NSObject, RouteHandler {
         }
         targetRoute.request = request
 
-        return show(request: request,targetRoute: targetRoute, sourceRoute: sourceRoute,complateCallBack: complateCallBack)
+        return show(request: request, targetRoute: targetRoute, sourceRoute: sourceRoute, complateCallBack: complateCallBack)
     }
 
-    open func show(request: RouteRequest,targetRoute:Routeable,sourceRoute:UIViewController,complateCallBack:(()->Void)?) -> Bool {
-
+    open func show(request: RouteRequest, targetRoute: Routeable, sourceRoute: UIViewController, complateCallBack: (() -> Void)?) -> Bool {
         switch targetRoute.preferTransition {
         case .push:
             if !targetRoute.viewController.isKind(of: UINavigationController.self) {
-                var NVC:UINavigationController? = nil
-                if sourceRoute.isKind(of: UINavigationController.self){
+                var NVC: UINavigationController?
+                if sourceRoute.isKind(of: UINavigationController.self) {
                     NVC = sourceRoute as? UINavigationController
-                }else if sourceRoute.navigationController != nil {
+                } else if sourceRoute.navigationController != nil {
                     NVC = sourceRoute.navigationController
                 }
-                    if let qmNvc = NVC as? QMUINavigationController {
-                        qmNvc.qmui_pushViewController(targetRoute.viewController, animated: request.animated, completion: {
-                            if let callBack = complateCallBack {
-                                callBack()
-                                request.isConsumed = true
-                            }
-                        })
-                        
-                    } else {
-                        let qmNvc = BSKBaseNavigationController(rootViewController: targetRoute.viewController)
-                        UIApplication.shared.bsk.topViewController?.present(qmNvc, animated: request.animated, completion: {
-                            if let callBack = complateCallBack {
-                                callBack()
-                                request.isConsumed = true
-                            }
-                        })
+                if let qmNvc = NVC {
+                    qmNvc.pushViewController(targetRoute.viewController, animated: request.animated)
+                    if let callBack = complateCallBack {
+                        callBack()
+                        request.isConsumed = true
                     }
-            }else{
+                } else {
+                    let qmNvc = UINavigationController(rootViewController: targetRoute.viewController)
+                    UIApplication.shared.bsk.topViewController?.present(qmNvc, animated: request.animated, completion: {
+                        if let callBack = complateCallBack {
+                            callBack()
+                            request.isConsumed = true
+                        }
+                    })
+                }
+            } else {
                 BSKConsole.warning("The target route require “push” action, but itself is a NavigationController also !")
                 return false
             }
         case .present:
-            sourceRoute.present(targetRoute.viewController, animated:request.animated) {
-                if let callBack = complateCallBack{
+            sourceRoute.present(targetRoute.viewController, animated: request.animated) {
+                if let callBack = complateCallBack {
                     callBack()
                     request.isConsumed = true
                 }
@@ -79,11 +73,11 @@ open class BSKRouteHandler:NSObject, RouteHandler {
         }
         return true
     }
-    
+
     open func target(for request: RouteRequest) -> Routeable? {
-        return BSKBaseViewController()
+        return nil
     }
-    
+
     open func source(for request: RouteRequest) -> UIViewController? {
         let topvc = UIApplication.shared.bsk.topViewController
         if let nvc = topvc?.navigationController {
@@ -91,6 +85,4 @@ open class BSKRouteHandler:NSObject, RouteHandler {
         }
         return topvc
     }
-    
-
 }

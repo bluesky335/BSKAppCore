@@ -8,28 +8,26 @@
 
 import UIKit
 
-extension Date {
-    enum Format: String {
-        /// yyyy 完整的年 如：2019
-        case year = "yyyy"
+fileprivate class __XXXClass {}
 
-        /// yy 年的后两位 如：19
-        case yearSurfix = "yy"
-
-        /// dd 天
-        case day = "dd"
-        case hour = ""
-    }
-}
+fileprivate let localize = BSKLocalization(bundle: Bundle(for: __XXXClass.self), table: "DateToString")
 
 public extension BSKExtension where Base == Date {
-    func toString(formate: String, locale: Locale? = .current) -> String {
-        let dateFormate = DateFormatter()
+    /// 转换日期成字符串
+    /// - Parameters:
+    ///   - formate: 日期格式，例如"yyyy-MM-dd",如果不为空且 指定了 formater，则它将被赋值给formater.dateFormat
+    ///   - locale: 地区，用于时间的本地化，默认 当前地区
+    ///   - formater: 指定formatter 如果不指定，则重新初始化一个
+    /// - Returns: 返回格式化的字符串
+    func toString(formate: String? = nil, locale: Locale? = .current, use formater: DateFormatter? = nil) -> String {
+        let dateFormater = formater ?? DateFormatter()
         if let l = locale {
-            dateFormate.locale = l
+            dateFormater.locale = l
         }
-        dateFormate.dateFormat = formate
-        return dateFormate.string(from: base)
+        if formate != nil {
+            dateFormater.dateFormat = formate
+        }
+        return dateFormater.string(from: base)
     }
 
     /// 例如："20190608123400"
@@ -38,7 +36,7 @@ public extension BSKExtension where Base == Date {
     }
 
     func toString(locale: Locale = .current) -> String {
-        let localStr = BSKLocalization.getLocalStr(table: "DateToString")
+        
 
         var calendar = Calendar.current
         calendar.locale = locale
@@ -58,23 +56,23 @@ public extension BSKExtension where Base == Date {
                 // 一小时以内
                 if let m = compoents.minute {
                     if m < 0 {
-                        return "\(abs(m))\(localStr.localStr(key: "分钟以前"))"
+                        return "\(abs(m))\(localize.localStr(key: "分钟以前"))"
                     } else if m == 0 {
                         // 一分钟以内
-                        return localStr.localStr(key: "刚刚")
+                        return localize.localStr(key: "刚刚")
                     }
                 }
             }
             // 今天
-            dateFormate.dateFormat = localStr.localStr(key: "HH:mm")
+            dateFormate.dateFormat = localize.localStr(key: "HH:mm")
             return dateFormate.string(from: base)
         } else if calendar.isDateInYesterday(base) {
             // 昨天
-            dateFormate.dateFormat = localStr.localStr(key: "昨天 HH:mm")
+            dateFormate.dateFormat = localize.localStr(key: "昨天 HH:mm")
             return dateFormate.string(from: base)
         } else if calendar.isDateInTomorrow(base) {
             // 明天
-            dateFormate.dateFormat = localStr.localStr(key: "明天 HH:mm")
+            dateFormate.dateFormat = localize.localStr(key: "明天 HH:mm")
             return dateFormate.string(from: base)
         }
 

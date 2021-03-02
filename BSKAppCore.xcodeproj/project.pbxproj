@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01C7A1CA25EE87C3006EDB19 /* PinyinFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C7A1C425EE87C3006EDB19 /* PinyinFormatter.swift */; };
+		01C7A1CB25EE87C3006EDB19 /* unicode_to_hanyu_pinyin.txt in Resources */ = {isa = PBXBuildFile; fileRef = 01C7A1C525EE87C3006EDB19 /* unicode_to_hanyu_pinyin.txt */; };
+		01C7A1CC25EE87C3006EDB19 /* String+HanziPinyin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C7A1C625EE87C3006EDB19 /* String+HanziPinyin.swift */; };
+		01C7A1CD25EE87C3006EDB19 /* HanziPinyinResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C7A1C725EE87C3006EDB19 /* HanziPinyinResource.swift */; };
+		01C7A1CE25EE87C3006EDB19 /* HanziPinyin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C7A1C825EE87C3006EDB19 /* HanziPinyin.swift */; };
+		01C7A1CF25EE87C3006EDB19 /* PinyinOutputFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C7A1C925EE87C3006EDB19 /* PinyinOutputFormat.swift */; };
+		01C7A1DC25EE9B68006EDB19 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C7A1DB25EE9B68006EDB19 /* UIColor+Extension.swift */; };
 		2AF2DDDF2F840EE698DFD3E4 /* Pods_BSKAppCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F46C1E8BB628D57FAD1E660 /* Pods_BSKAppCore.framework */; };
 		C426CCD122C48F8F00F6B982 /* BSKLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C426CCD022C48F8F00F6B982 /* BSKLocalization.swift */; };
 		C4314AAF22C22EE7008DBCA8 /* BSKAppCore.h in Headers */ = {isa = PBXBuildFile; fileRef = C4314AAD22C22EE7008DBCA8 /* BSKAppCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,14 +30,8 @@
 		C4314AE622C30CE7008DBCA8 /* String+SubStringRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314ACF22C30CE7008DBCA8 /* String+SubStringRange.swift */; };
 		C4314AE722C30CE7008DBCA8 /* String+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AD022C30CE7008DBCA8 /* String+Size.swift */; };
 		C4314AE822C30CE7008DBCA8 /* String+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AD122C30CE7008DBCA8 /* String+URL.swift */; };
-		C4314AEA22C30CE7008DBCA8 /* String+PinYin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AD322C30CE7008DBCA8 /* String+PinYin.swift */; };
 		C4314AEB22C30CE7008DBCA8 /* String+Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AD422C30CE7008DBCA8 /* String+Hash.swift */; };
-		C4314AEC22C30CE7008DBCA8 /* String+Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AD522C30CE7008DBCA8 /* String+Attribute.swift */; };
 		C4314AED22C30CE7008DBCA8 /* BSKExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AD722C30CE7008DBCA8 /* BSKExtension.swift */; };
-		C4314B0122C30CF6008DBCA8 /* BSKBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AF022C30CF6008DBCA8 /* BSKBaseViewController.swift */; };
-		C4314B0222C30CF6008DBCA8 /* BSKBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AF122C30CF6008DBCA8 /* BSKBaseNavigationController.swift */; };
-		C4314B0522C30CF6008DBCA8 /* BSKErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AF622C30CF6008DBCA8 /* BSKErrorView.swift */; };
-		C4314B0622C30CF6008DBCA8 /* BSKAnimationHudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AF722C30CF6008DBCA8 /* BSKAnimationHudView.swift */; };
 		C4314B0722C30CF6008DBCA8 /* BSKRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AFA22C30CF6008DBCA8 /* BSKRoute.swift */; };
 		C4314B0822C30CF6008DBCA8 /* BSKRouterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AFC22C30CF6008DBCA8 /* BSKRouterProtocols.swift */; };
 		C4314B0922C30CF6008DBCA8 /* BSKRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314AFD22C30CF6008DBCA8 /* BSKRouter.swift */; };
@@ -39,7 +40,6 @@
 		C4314B0C22C30CF6008DBCA8 /* BSKRouteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4314B0022C30CF6008DBCA8 /* BSKRouteRequest.swift */; };
 		C4314B0F22C46325008DBCA8 /* DateToString.strings in Resources */ = {isa = PBXBuildFile; fileRef = C4314B1122C46325008DBCA8 /* DateToString.strings */; };
 		C4427DAB22DC6294007B26CE /* Array+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4427DAA22DC6294007B26CE /* Array+random.swift */; };
-		C461609122E9CDFD00F43A9C /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C461609022E9CDFD00F43A9C /* Timer.swift */; };
 		C46C658E22F1D85A0014F74B /* BSKRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */; };
 		C46C659022F27CFF0014F74B /* BSKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C658F22F27CFF0014F74B /* BSKButton.swift */; };
 		C4829CFC231CF00100769832 /* PHAsset+outVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4829CFB231CF00100769832 /* PHAsset+outVideo.swift */; };
@@ -51,16 +51,21 @@
 		C4C00C8622F6E9BC00FE2CCD /* BSKCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C00C8522F6E9BC00FE2CCD /* BSKCheckButton.swift */; };
 		C4C88ED32317C17B0054C6F4 /* Data+string.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C88ED22317C17B0054C6F4 /* Data+string.swift */; };
 		C4F5D55322C49AAD00F453AC /* Bundle+AppCoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D55222C49AAD00F453AC /* Bundle+AppCoreViewController.swift */; };
-		C4F5D57D22C5C0E300F453AC /* UIColor+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D57C22C5C0E300F453AC /* UIColor+Random.swift */; };
-		C4F5D58622C5DB4800F453AC /* BSKBaseTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D58522C5DB4800F453AC /* BSKBaseTabbarController.swift */; };
 		C4F5D58922C62A2400F453AC /* UINavigationController+pushOnlyOnce.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5D58822C62A2400F453AC /* UINavigationController+pushOnlyOnce.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01C7A1C425EE87C3006EDB19 /* PinyinFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinyinFormatter.swift; sourceTree = "<group>"; };
+		01C7A1C525EE87C3006EDB19 /* unicode_to_hanyu_pinyin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = unicode_to_hanyu_pinyin.txt; sourceTree = "<group>"; };
+		01C7A1C625EE87C3006EDB19 /* String+HanziPinyin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+HanziPinyin.swift"; sourceTree = "<group>"; };
+		01C7A1C725EE87C3006EDB19 /* HanziPinyinResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HanziPinyinResource.swift; sourceTree = "<group>"; };
+		01C7A1C825EE87C3006EDB19 /* HanziPinyin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HanziPinyin.swift; sourceTree = "<group>"; };
+		01C7A1C925EE87C3006EDB19 /* PinyinOutputFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinyinOutputFormat.swift; sourceTree = "<group>"; };
+		01C7A1DB25EE9B68006EDB19 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		1F46C1E8BB628D57FAD1E660 /* Pods_BSKAppCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BSKAppCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD79180DC89377F217C46333 /* Pods-BSKAppCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSKAppCore.debug.xcconfig"; path = "Target Support Files/Pods-BSKAppCore/Pods-BSKAppCore.debug.xcconfig"; sourceTree = "<group>"; };
 		C426CCCD22C4699D00F6B982 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DateToString.strings; sourceTree = "<group>"; };
-		C426CCD022C48F8F00F6B982 /* BSKLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BSKLocalization.swift; path = Sources/BSKLocalization.swift; sourceTree = SOURCE_ROOT; };
+		C426CCD022C48F8F00F6B982 /* BSKLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BSKLocalization.swift; path = Sources/Utils/BSKLocalization.swift; sourceTree = SOURCE_ROOT; };
 		C4314AAA22C22EE7008DBCA8 /* BSKAppCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BSKAppCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4314AAD22C22EE7008DBCA8 /* BSKAppCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BSKAppCore.h; sourceTree = "<group>"; };
 		C4314AAE22C22EE7008DBCA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,14 +82,8 @@
 		C4314ACF22C30CE7008DBCA8 /* String+SubStringRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SubStringRange.swift"; sourceTree = "<group>"; };
 		C4314AD022C30CE7008DBCA8 /* String+Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Size.swift"; sourceTree = "<group>"; };
 		C4314AD122C30CE7008DBCA8 /* String+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+URL.swift"; sourceTree = "<group>"; };
-		C4314AD322C30CE7008DBCA8 /* String+PinYin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+PinYin.swift"; sourceTree = "<group>"; };
 		C4314AD422C30CE7008DBCA8 /* String+Hash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Hash.swift"; sourceTree = "<group>"; };
-		C4314AD522C30CE7008DBCA8 /* String+Attribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Attribute.swift"; sourceTree = "<group>"; };
 		C4314AD722C30CE7008DBCA8 /* BSKExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSKExtension.swift; sourceTree = "<group>"; };
-		C4314AF022C30CF6008DBCA8 /* BSKBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSKBaseViewController.swift; sourceTree = "<group>"; };
-		C4314AF122C30CF6008DBCA8 /* BSKBaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSKBaseNavigationController.swift; sourceTree = "<group>"; };
-		C4314AF622C30CF6008DBCA8 /* BSKErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSKErrorView.swift; sourceTree = "<group>"; };
-		C4314AF722C30CF6008DBCA8 /* BSKAnimationHudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSKAnimationHudView.swift; sourceTree = "<group>"; };
 		C4314AFA22C30CF6008DBCA8 /* BSKRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSKRoute.swift; sourceTree = "<group>"; };
 		C4314AFC22C30CF6008DBCA8 /* BSKRouterProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSKRouterProtocols.swift; sourceTree = "<group>"; };
 		C4314AFD22C30CF6008DBCA8 /* BSKRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSKRouter.swift; sourceTree = "<group>"; };
@@ -94,7 +93,6 @@
 		C4314B1222C4632A008DBCA8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DateToString.strings"; sourceTree = "<group>"; };
 		C4427DAA22DC6294007B26CE /* Array+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+random.swift"; sourceTree = "<group>"; };
 		C44D40FF22FE7C1200067A36 /* BSKAppCore.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BSKAppCore.podspec; sourceTree = "<group>"; };
-		C461609022E9CDFD00F43A9C /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKRadioButton.swift; sourceTree = "<group>"; };
 		C46C658F22F27CFF0014F74B /* BSKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKButton.swift; sourceTree = "<group>"; };
 		C4829CFB231CF00100769832 /* PHAsset+outVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PHAsset+outVideo.swift"; sourceTree = "<group>"; };
@@ -107,8 +105,6 @@
 		C4C00C8522F6E9BC00FE2CCD /* BSKCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKCheckButton.swift; sourceTree = "<group>"; };
 		C4C88ED22317C17B0054C6F4 /* Data+string.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+string.swift"; sourceTree = "<group>"; };
 		C4F5D55222C49AAD00F453AC /* Bundle+AppCoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+AppCoreViewController.swift"; sourceTree = "<group>"; };
-		C4F5D57C22C5C0E300F453AC /* UIColor+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Random.swift"; sourceTree = "<group>"; };
-		C4F5D58522C5DB4800F453AC /* BSKBaseTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSKBaseTabbarController.swift; sourceTree = "<group>"; };
 		C4F5D58822C62A2400F453AC /* UINavigationController+pushOnlyOnce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+pushOnlyOnce.swift"; sourceTree = "<group>"; };
 		D5ABF998153BFFD8475EA47C /* Pods-BSKAppCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BSKAppCore.release.xcconfig"; path = "Target Support Files/Pods-BSKAppCore/Pods-BSKAppCore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +121,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01C7A1C125EE8698006EDB19 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C426CCD022C48F8F00F6B982 /* BSKLocalization.swift */,
+				C4314AB722C30CE7008DBCA8 /* BSKUtils.swift */,
+				C4314AB622C30CE7008DBCA8 /* Extension-Util */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		01C7A1C325EE87C3006EDB19 /* Pinyin */ = {
+			isa = PBXGroup;
+			children = (
+				01C7A1C425EE87C3006EDB19 /* PinyinFormatter.swift */,
+				01C7A1C525EE87C3006EDB19 /* unicode_to_hanyu_pinyin.txt */,
+				01C7A1C625EE87C3006EDB19 /* String+HanziPinyin.swift */,
+				01C7A1C725EE87C3006EDB19 /* HanziPinyinResource.swift */,
+				01C7A1C825EE87C3006EDB19 /* HanziPinyin.swift */,
+				01C7A1C925EE87C3006EDB19 /* PinyinOutputFormat.swift */,
+			);
+			path = Pinyin;
+			sourceTree = "<group>";
+		};
 		47FA3595104918D5462B2D98 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,11 +174,9 @@
 		C4314AAC22C22EE7008DBCA8 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C4314AB722C30CE7008DBCA8 /* BSKUtils.swift */,
-				C426CCD022C48F8F00F6B982 /* BSKLocalization.swift */,
+				01C7A1C125EE8698006EDB19 /* Utils */,
 				C4829D03231D4DE700769832 /* MapTool */,
 				C4314AEE22C30CF6008DBCA8 /* UIBase */,
-				C4314AB622C30CE7008DBCA8 /* Extension-Util */,
 				C4314AAD22C22EE7008DBCA8 /* BSKAppCore.h */,
 				C4314AAE22C22EE7008DBCA8 /* Info.plist */,
 			);
@@ -171,7 +188,6 @@
 			children = (
 				C4829CFA231CF00100769832 /* Photos */,
 				C4C88ED12317C12F0054C6F4 /* Data */,
-				C461608F22E9CDEE00F43A9C /* Timer */,
 				C4427DA922DC627F007B26CE /* Array */,
 				C4F5D55122C49A9D00F453AC /* Bundle */,
 				C4314AD622C30CE7008DBCA8 /* Base */,
@@ -249,14 +265,13 @@
 		C4314ACA22C30CE7008DBCA8 /* String */ = {
 			isa = PBXGroup;
 			children = (
+				01C7A1C325EE87C3006EDB19 /* Pinyin */,
 				C4314ACD22C30CE7008DBCA8 /* String+RegularExpression.swift */,
 				C4314ACE22C30CE7008DBCA8 /* String+Random.swift */,
 				C4314ACF22C30CE7008DBCA8 /* String+SubStringRange.swift */,
 				C4314AD022C30CE7008DBCA8 /* String+Size.swift */,
 				C4314AD122C30CE7008DBCA8 /* String+URL.swift */,
-				C4314AD322C30CE7008DBCA8 /* String+PinYin.swift */,
 				C4314AD422C30CE7008DBCA8 /* String+Hash.swift */,
-				C4314AD522C30CE7008DBCA8 /* String+Attribute.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -272,28 +287,15 @@
 		C4314AEE22C30CF6008DBCA8 /* UIBase */ = {
 			isa = PBXGroup;
 			children = (
-				C4314AEF22C30CF6008DBCA8 /* ViewControllers */,
 				C4314AF522C30CF6008DBCA8 /* View */,
 				C4314AF822C30CF6008DBCA8 /* Router */,
 			);
 			path = UIBase;
 			sourceTree = "<group>";
 		};
-		C4314AEF22C30CF6008DBCA8 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				C4314AF022C30CF6008DBCA8 /* BSKBaseViewController.swift */,
-				C4314AF122C30CF6008DBCA8 /* BSKBaseNavigationController.swift */,
-				C4F5D58522C5DB4800F453AC /* BSKBaseTabbarController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
 		C4314AF522C30CF6008DBCA8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C4314AF622C30CF6008DBCA8 /* BSKErrorView.swift */,
-				C4314AF722C30CF6008DBCA8 /* BSKAnimationHudView.swift */,
 				C46C658D22F1D85A0014F74B /* BSKRadioButton.swift */,
 				C46C658F22F27CFF0014F74B /* BSKButton.swift */,
 				C4C00C8522F6E9BC00FE2CCD /* BSKCheckButton.swift */,
@@ -336,14 +338,6 @@
 				C4427DAA22DC6294007B26CE /* Array+random.swift */,
 			);
 			path = Array;
-			sourceTree = "<group>";
-		};
-		C461608F22E9CDEE00F43A9C /* Timer */ = {
-			isa = PBXGroup;
-			children = (
-				C461609022E9CDFD00F43A9C /* Timer.swift */,
-			);
-			path = Timer;
 			sourceTree = "<group>";
 		};
 		C4829CFA231CF00100769832 /* Photos */ = {
@@ -393,7 +387,7 @@
 		C4F5D57B22C5C0CB00F453AC /* UIColor */ = {
 			isa = PBXGroup;
 			children = (
-				C4F5D57C22C5C0E300F453AC /* UIColor+Random.swift */,
+				01C7A1DB25EE9B68006EDB19 /* UIColor+Extension.swift */,
 			);
 			path = UIColor;
 			sourceTree = "<group>";
@@ -485,6 +479,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01C7A1CB25EE87C3006EDB19 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				C4829D08231D503100769832 /* Navigation.strings in Resources */,
 				C4829D1C231E494E00769832 /* GCJ02.json in Resources */,
 				C4314B0F22C46325008DBCA8 /* DateToString.strings in Resources */,
@@ -529,17 +524,13 @@
 				C4427DAB22DC6294007B26CE /* Array+random.swift in Sources */,
 				C4314B0B22C30CF6008DBCA8 /* BSKRouteMatcher.swift in Sources */,
 				C4314B0922C30CF6008DBCA8 /* BSKRouter.swift in Sources */,
-				C4314B0222C30CF6008DBCA8 /* BSKBaseNavigationController.swift in Sources */,
-				C4314AEA22C30CE7008DBCA8 /* String+PinYin.swift in Sources */,
 				C4314ADB22C30CE7008DBCA8 /* UIImage+MaxJpgData.swift in Sources */,
 				C4F5D58922C62A2400F453AC /* UINavigationController+pushOnlyOnce.swift in Sources */,
 				C4314AEB22C30CE7008DBCA8 /* String+Hash.swift in Sources */,
 				C4314AD822C30CE7008DBCA8 /* BSKUtils.swift in Sources */,
-				C4F5D57D22C5C0E300F453AC /* UIColor+Random.swift in Sources */,
 				C4314B0722C30CF6008DBCA8 /* BSKRoute.swift in Sources */,
 				C46C658E22F1D85A0014F74B /* BSKRadioButton.swift in Sources */,
 				C4314AE722C30CE7008DBCA8 /* String+Size.swift in Sources */,
-				C4F5D58622C5DB4800F453AC /* BSKBaseTabbarController.swift in Sources */,
 				C4314AE522C30CE7008DBCA8 /* String+Random.swift in Sources */,
 				C4314B0A22C30CF6008DBCA8 /* BSKRouteHandler.swift in Sources */,
 				C4314B0822C30CF6008DBCA8 /* BSKRouterProtocols.swift in Sources */,
@@ -548,23 +539,24 @@
 				C4314ADD22C30CE7008DBCA8 /* UIView+border.swift in Sources */,
 				C4314ADC22C30CE7008DBCA8 /* TopViewController.swift in Sources */,
 				C426CCD122C48F8F00F6B982 /* BSKLocalization.swift in Sources */,
-				C4314B0522C30CF6008DBCA8 /* BSKErrorView.swift in Sources */,
+				01C7A1CE25EE87C3006EDB19 /* HanziPinyin.swift in Sources */,
+				01C7A1CA25EE87C3006EDB19 /* PinyinFormatter.swift in Sources */,
 				C4314AE822C30CE7008DBCA8 /* String+URL.swift in Sources */,
 				C4314AE622C30CE7008DBCA8 /* String+SubStringRange.swift in Sources */,
 				C4C88ED32317C17B0054C6F4 /* Data+string.swift in Sources */,
 				C4314AE422C30CE7008DBCA8 /* String+RegularExpression.swift in Sources */,
+				01C7A1CF25EE87C3006EDB19 /* PinyinOutputFormat.swift in Sources */,
 				C4829CFC231CF00100769832 /* PHAsset+outVideo.swift in Sources */,
 				C4C00C8622F6E9BC00FE2CCD /* BSKCheckButton.swift in Sources */,
-				C4314B0122C30CF6008DBCA8 /* BSKBaseViewController.swift in Sources */,
 				C4829D1B231E494E00769832 /* JZLocationConverter.swift in Sources */,
 				C4829D1A231E494E00769832 /* JZAreaManager.swift in Sources */,
-				C4314AEC22C30CE7008DBCA8 /* String+Attribute.swift in Sources */,
-				C4314B0622C30CF6008DBCA8 /* BSKAnimationHudView.swift in Sources */,
+				01C7A1CC25EE87C3006EDB19 /* String+HanziPinyin.swift in Sources */,
 				C4F5D55322C49AAD00F453AC /* Bundle+AppCoreViewController.swift in Sources */,
 				C4314B0C22C30CF6008DBCA8 /* BSKRouteRequest.swift in Sources */,
 				C4829D05231D4DF400769832 /* BSKNavigation.swift in Sources */,
+				01C7A1CD25EE87C3006EDB19 /* HanziPinyinResource.swift in Sources */,
 				C46C659022F27CFF0014F74B /* BSKButton.swift in Sources */,
-				C461609122E9CDFD00F43A9C /* Timer.swift in Sources */,
+				01C7A1DC25EE9B68006EDB19 /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

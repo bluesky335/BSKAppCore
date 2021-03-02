@@ -28,7 +28,7 @@ open class JZAreaManager {
                              finished:((_ error:JZFileError?) -> Void)?) {
         var path = filePath
         if path == nil {
-            path = ResourceBundle(for: "JsonFiles").path(forResource: "GCJ02", ofType: "json")
+            path = Bundle(for: JZAreaManager.self).path(forResource: "GCJ02", ofType: "json")
         }
         
         guard let filePath = path else {

@@ -14,7 +14,7 @@ open class BSKRadioButton: BSKButton {
     
     override open var isSelected: Bool{
         set{
-            if newValue == true {
+            if newValue == true, newValue != super.isSelected {
                 if let mySuperView = self.superview {
                     for view in mySuperView.subviews{
                         if let v = view as? BSKRadioButton ,v != self,v.groupId == self.groupId {
