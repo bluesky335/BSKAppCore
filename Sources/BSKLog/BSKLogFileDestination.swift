@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if SPM
+import BSKUtils
+#endif
 
 public protocol BSKLogEncryptor {
     func encypt(_ str: String) throws -> String

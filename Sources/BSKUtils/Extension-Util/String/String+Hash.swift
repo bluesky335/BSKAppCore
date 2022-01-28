@@ -9,8 +9,14 @@
 import Foundation
 import CommonCrypto
 
-extension BSKExtension:HashAble where Base == String {
-    public var hashData: Data{
-        return self.base.data(using: .utf8) ?? Data()
+extension BSKExtension: Equatable where  Base == String {
+    public static func == (lhs: BSKExtension<Base>, rhs: BSKExtension<Base>) -> Bool {
+        return lhs.base == rhs.base
+    }
+}
+
+extension BSKExtension:Hashable where Base == String {
+    public func hash(into hasher: inout Hasher) {
+        return self.base.hash(into: &hasher)
     }
 }

@@ -24,17 +24,37 @@ let package = Package(
     dependencies:[
     ],
     targets: [
-        .target(name: "BSKAppCore",dependencies: ["BSKUtils","BSKLog"],resources: [
-            .copy("./MapTool/JZLocation/GCJ02.json.data")
-        ],swiftSettings:[ .define("SPM")]),
+        .target(name: "BSKAppCore",
+                dependencies: [
+                    "BSKUtils",
+                    "BSKLog",
+                ],
+                resources: [
+                    .copy("./MapTool/JZLocation/GCJ02.json.data")
+                ],
+                swiftSettings:[
+                    .define("SPM")
+                ]),
         
-        .target(name: "BSKLogConsole",dependencies: ["BSKLog"],swiftSettings:[ .define("SPM")]),
+        .target(name: "BSKLogConsole",
+                dependencies: ["BSKLog"],
+                swiftSettings:[
+                    .define("SPM")
+                ]),
         
-        .target(name: "BSKLog",dependencies: ["BSKUtils"]),
+        .target(name: "BSKLog",
+                dependencies: ["BSKUtils"],
+                swiftSettings: [
+                    .define("SPM")
+                ]),
         
-        .target(name: "BSKUtils",resources: [
-            .copy("./Extension-Util/String/Pinyin/unicode_to_hanyu_pinyin.txt")
-        ],swiftSettings:[ .define("SPM")]),
+        .target(name: "BSKUtils",
+                resources: [
+                    .copy("./Extension-Util/String/Pinyin/unicode_to_hanyu_pinyin.txt")
+                ],
+                swiftSettings:[
+                    .define("SPM")
+                ]),
         
         .testTarget(name: "BSKUtilsTest",dependencies: ["BSKUtils"])
     ],

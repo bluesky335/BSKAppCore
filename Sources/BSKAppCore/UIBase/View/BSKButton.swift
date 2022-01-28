@@ -6,27 +6,27 @@
 //  Copyright © 2019 cn.liuwanlin. All rights reserved.
 //
 
+import BSKUtils
 import UIKit
 
 open class BSKButton: UIButton {
-    
     private var fontDic: [UIControl.State.RawValue: UIFont] = [:]
     private var bgColorDic: [UIControl.State.RawValue: UIColor] = [:]
-    
-    open var tapAction:((BSKButton)->Void)?
-    
-    public override init(frame: CGRect) {
+
+    open var tapAction: ((BSKButton) -> Void)?
+
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         didInit()
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         didInit()
     }
-    
+
     open func didInit() {
-        self.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
     }
 
     open func setTitleFount(_ fount: UIFont, for state: UIControl.State) {
@@ -47,12 +47,21 @@ open class BSKButton: UIButton {
         return bgColorDic[state.rawValue]
     }
 
-    private func checkState() {
-        if let font = fontDic[state.rawValue] {
-            titleLabel?.font = font
+    private func checkState(animated: Bool = false) {
+        let updateStatue = { () -> Void in
+            if let font = self.fontDic[self.state.rawValue] {
+                self.titleLabel?.font = font
+            }
+            if let color = self.bgColorDic[self.state.rawValue] {
+                self.backgroundColor = color
+            }
         }
-        if let color = bgColorDic[state.rawValue] {
-            backgroundColor = color
+        if animated {
+            UIView.animate(withDuration: 0.3) {
+                updateStatue()
+            }
+        } else {
+            updateStatue()
         }
     }
 
@@ -76,23 +85,23 @@ open class BSKButton: UIButton {
 
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        checkState()
+        checkState(animated: true)
     }
 
     override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        checkState()
+        checkState(animated: true)
     }
 
     override open func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        checkState()
+        checkState(animated: true)
     }
-    
-    open func setTapAction( _ action:@escaping (BSKButton)->Void) {
-        self.tapAction = action
+
+    open func setTapAction(_ action: @escaping (BSKButton) -> Void) {
+        tapAction = action
     }
-    
+
     @objc private func buttonAction() {
         tapAction?(self)
     }
