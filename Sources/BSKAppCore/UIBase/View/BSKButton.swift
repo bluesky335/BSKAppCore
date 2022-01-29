@@ -5,9 +5,10 @@
 //  Created by 刘万林 on 2019/8/1.
 //  Copyright © 2019 cn.liuwanlin. All rights reserved.
 //
-
-import BSKUtils
 import UIKit
+#if SPM
+import BSKUtils
+#endif
 
 open class BSKButton: UIButton {
     private var fontDic: [UIControl.State.RawValue: UIFont] = [:]

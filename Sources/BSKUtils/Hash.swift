@@ -63,13 +63,13 @@ public extension DataConvertAble {
     }
 }
 
-public extension String: DataConvertAble {
+extension String: DataConvertAble {
     public var dataValue: Data {
         return data(using: .utf8) ?? Data()
     }
 }
 
-public extension Data: DataConvertAble {
+extension Data: DataConvertAble {
     public var dataValue: Data {
         return self
     }

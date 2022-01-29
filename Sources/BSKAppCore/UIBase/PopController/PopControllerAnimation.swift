@@ -7,16 +7,6 @@
 
 import UIKit
 
-fileprivate extension UIEdgeInsets {
-    var horizontal: CGFloat {
-        return left + right
-    }
-
-    var vertical: CGFloat {
-        return top + bottom
-    }
-}
-
 class PopController: UIViewController {
     var layout: PopPresentationController.Layout = .center(size: nil) {
         didSet {
