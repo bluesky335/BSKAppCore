@@ -1,5 +1,5 @@
 //
-//  UIButton+layer.swift
+//  UIView+layer.swift
 //  BSKAppCore
 //
 //  Created by BlueSky335 on 2019/4/15.
@@ -10,6 +10,26 @@ import UIKit
 
 extension UIView {
     
+    @available(iOS 11.0, *)
+    @objc open var maskedCorners: CACornerMask {
+        set {
+            layer.maskedCorners = newValue
+        }
+        get {
+            return layer.maskedCorners
+        }
+    }
+
+    @available(iOS 13.0, *)
+    @objc open var cornerCurve: CALayerCornerCurve {
+        set {
+            layer.cornerCurve = newValue
+        }
+        get {
+            return layer.cornerCurve
+        }
+    }
+
     @IBInspectable @objc open var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
