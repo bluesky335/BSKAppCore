@@ -8,7 +8,7 @@
 import UIKit
 
 /// 逐行读取文件
-open class FileReader {
+open class BSKFileReader {
 
     let encoding : String.Encoding
     let chunkSize : Int
@@ -86,7 +86,7 @@ open class FileReader {
     }
 }
 
-extension FileReader : Sequence {
+extension BSKFileReader : Sequence {
     open func makeIterator() -> AnyIterator<String> {
         return AnyIterator {
             return self.nextLine()

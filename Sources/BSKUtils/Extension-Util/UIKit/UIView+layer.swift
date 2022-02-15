@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 extension UIView {
-    
     @available(iOS 11.0, *)
     @objc open var maskedCorners: CACornerMask {
         set {
@@ -27,6 +26,15 @@ extension UIView {
         }
         get {
             return layer.cornerCurve
+        }
+    }
+
+    @objc open var masksToBounds: Bool {
+        get {
+            return layer.masksToBounds
+        }
+        set {
+            layer.masksToBounds = newValue
         }
     }
 

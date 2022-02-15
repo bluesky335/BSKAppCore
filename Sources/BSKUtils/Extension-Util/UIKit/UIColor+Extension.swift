@@ -176,3 +176,9 @@ extension UIColor {
         return UIColor(hue: hsba.hue, saturation: saturation, brightness: hsba.brightness, alpha: hsba.alpha)
     }
 }
+
+public extension Array where Element: UIColor {
+    var cgcolors: [CGColor] {
+        return map({ $0.cgColor })
+    }
+}

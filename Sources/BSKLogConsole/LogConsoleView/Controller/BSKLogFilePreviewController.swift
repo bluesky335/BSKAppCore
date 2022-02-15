@@ -48,7 +48,7 @@ class BSKLogFilePreviewController: LogBaseViewController {
     func loadData() {
         loadingView.startAnimating()
         DispatchQueue(label: "readLog").async {
-            guard let fileReader = FileReader(path: self.fileURL.path) else {
+            guard let fileReader = BSKFileReader(path: self.fileURL.path) else {
                 return
             }
             var logs: [BSKLogObject] = []
