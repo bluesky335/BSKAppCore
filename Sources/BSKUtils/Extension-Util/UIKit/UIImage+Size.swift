@@ -39,7 +39,7 @@ public extension UIImage {
     /// - Parameters:
     ///   - newSize: 新尺寸
     /// - Returns: 新图片
-    func image(withSize newSize: CGSize, mode: ResizeMode) -> UIImage? {
+    func image(withSize newSize: CGSize, mode: ResizeMode = .scaleToFill) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(newSize, !hasAlphaChannel, UIScreen.main.scale)
         var imageRect = CGRect.zero
         switch mode {
