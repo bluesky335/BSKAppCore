@@ -49,6 +49,8 @@ open class PopController: BSKViewController {
         }
     }
 
+    open var dimmingView: UIView?
+
     open var popPresentationController: PopPresentationController?
     open var dismissedAnimationController: PopControllerAnimation = .init(duration: 0.3, animation: .fade, direction: .dismiss)
     open var presentedAnimationController: PopControllerAnimation = .init(duration: 0.3, animation: .enlarge, direction: .present)
@@ -68,6 +70,11 @@ open class PopController: BSKViewController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         transitioningDelegate = self
         modalPresentationStyle = .custom
+    }
+    
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = UIColor(light: .white, dark: .black)
     }
 
     private func setupInteractionDismiss() {
@@ -227,6 +234,13 @@ extension PopController: UIViewControllerTransitioningDelegate {
         controller.contentInset = contentInset
         controller.fillSafeArea = fillSafeArea
         controller.showDimmingView = showDimmingView
+        if showDimmingView {
+            if let dimmingView = self.dimmingView {
+                controller.dimmingView = dimmingView
+            } else {
+                dimmingView = controller.dimmingView
+            }
+        }
         if tapDimmingViewTodismiss {
             controller.dismissDimmingViewTapGesture.isEnabled = tapDimmingViewTodismiss
         }
@@ -255,6 +269,7 @@ extension PopController: UIViewControllerTransitioningDelegate {
 open class PopPresentationController: UIPresentationController {
     /// 如果size 为 nil 将会调用 view.systemLayoutSizeFitting方法计算大小
     public enum Layout {
+        case fill
         case center(size: CGSize? = nil)
         case topLeft(size: CGSize? = nil)
         case topCenter(size: CGSize? = nil)
@@ -267,7 +282,7 @@ open class PopPresentationController: UIPresentationController {
         case custom(frame: CGRect)
     }
 
-    private(set) lazy var dimmingView: UIView = {
+    fileprivate lazy var dimmingView: UIView = {
         let view = UIView()
         view.backgroundColor = .black.withAlphaComponent(0.2)
         return view
@@ -298,32 +313,54 @@ open class PopPresentationController: UIPresentationController {
         }
         if showDimmingView {
             dimmingView.translatesAutoresizingMaskIntoConstraints = false
-            dimmingView.alpha = 0
             containerView.insertSubview(dimmingView, at: 0)
             dimmingView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
             dimmingView.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
             dimmingView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
             dimmingView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-            guard let coordinator = presentedViewController.transitionCoordinator else {
-                dimmingView.alpha = 1.0
-                return
+
+            if let efectView = dimmingView as? UIVisualEffectView {
+                let efect = efectView.effect
+                efectView.effect = nil
+                guard let coordinator = presentedViewController.transitionCoordinator else {
+                    efectView.effect = efect
+                    return
+                }
+                coordinator.animate(alongsideTransition: { _ in
+                    efectView.effect = efect
+                })
+            } else {
+                dimmingView.alpha = 0
+                guard let coordinator = presentedViewController.transitionCoordinator else {
+                    dimmingView.alpha = 1.0
+                    return
+                }
+                coordinator.animate(alongsideTransition: { _ in
+                    self.dimmingView.alpha = 1.0
+                })
             }
-            coordinator.animate(alongsideTransition: { _ in
-                self.dimmingView.alpha = 1.0
-            })
         }
     }
 
     override open func dismissalTransitionWillBegin() {
         if showDimmingView {
-            guard let coordinator = presentedViewController.transitionCoordinator else {
-                dimmingView.alpha = 0.0
-                return
+            if let efectView = dimmingView as? UIVisualEffectView {
+                guard let coordinator = presentedViewController.transitionCoordinator else {
+                    efectView.effect = nil
+                    return
+                }
+                coordinator.animate(alongsideTransition: { _ in
+                    efectView.effect = nil
+                })
+            } else {
+                guard let coordinator = presentedViewController.transitionCoordinator else {
+                    dimmingView.alpha = 0.0
+                    return
+                }
+                coordinator.animate(alongsideTransition: { _ in
+                    self.dimmingView.alpha = 0.0
+                })
             }
-
-            coordinator.animate(alongsideTransition: { _ in
-                self.dimmingView.alpha = 0.0
-            })
         }
     }
 
@@ -407,6 +444,8 @@ open class PopPresentationController: UIPresentationController {
 
         var targetFrame: CGRect = .zero
         switch layout {
+        case .fill:
+            targetFrame = self.containerView?.bounds ?? UIScreen.main.bounds
         case let .center(size):
             targetFrame.size = size ?? defaultSize
             targetFrame.origin = CGPoint(x: centerX(with: targetFrame.size), y: centerY(with: targetFrame.size))

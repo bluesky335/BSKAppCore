@@ -11,17 +11,22 @@ import UIKit
 public struct AppInfo {
     private init() {}
     /// 版本号
-    public static var version: String {
+    public static var shortVersion: String {
         return (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
     }
 
     /// App名称
-    public static var name: String {
+    public static var bundleName: String {
         return (Bundle.main.infoDictionary?[String(kCFBundleNameKey)] as? String) ?? ""
     }
 
+    /// App名称
+    public static var displayName: String {
+        return (Bundle.main.infoDictionary?[String("CFBundleDisplayName")] as? String) ?? ""
+    }
+
     /// build version
-    public static var versionCode: String {
+    public static var buildVersion: String {
         return (Bundle.main.infoDictionary?[String(kCFBundleVersionKey)] as? String) ?? ""
     }
 }
