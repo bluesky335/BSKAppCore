@@ -7,81 +7,162 @@
 
 import UIKit
 
-open class PopController: BSKViewController {
-    open var layout: PopPresentationController.Layout = .center(size: nil) {
-        didSet {
-            popPresentationController?.layout = layout
+/// 需要支持弹窗形式显示的 UIView 或者 UIViewController 的子类需要实现此协议
+public protocol PopupableType {
+    /// 弹窗样式配置
+    var popupConfig: PopupConfig { get }
+    /// 即将被手势隐藏时调用，包括滑动手势和点击遮罩视图。返回false阻止手势隐藏。
+    /// - Returns: 返回一个Bool决定是否允许dismiss操作,默认返回true
+    func popupControllerWillDismissByGesture() -> Bool
+}
+
+public extension PopupableType {
+    /// 默认返回true
+    func popupControllerWillDismissByGesture() -> Bool { true }
+}
+
+extension UIViewController {
+    private static var popupControllerKey = "PopupControllerKey"
+
+    private var popupController: PopupController? {
+        set {
+            objc_setAssociatedObject(self, &UIViewController.popupControllerKey, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+        get {
+            objc_getAssociatedObject(self, &UIViewController.popupControllerKey) as? PopupController
         }
     }
 
-    open var showDimmingView: Bool = true {
-        didSet {
-            popPresentationController?.showDimmingView = showDimmingView
+    /// 显示弹窗
+    /// - Parameters:
+    ///   - viewControllerToPresent: 要显示的控制器
+    ///   - config: 弹窗配置
+    ///   - completion: 完成回调
+    public func popupPresent<ViewControllerType>(_ viewControllerToPresent: ViewControllerType, animated: Bool, completion: (() -> Void)?) where ViewControllerType: UIViewController, ViewControllerType: PopupableType {
+        let popupController = PopupController(viewController: viewControllerToPresent, config: viewControllerToPresent.popupConfig)
+        viewControllerToPresent.modalPresentationStyle = .custom
+        viewControllerToPresent.popupController = popupController
+        viewControllerToPresent.transitioningDelegate = popupController
+        present(viewControllerToPresent, animated: animated, completion: completion)
+    }
+
+    /// 显示弹窗
+    /// - Parameters:
+    ///   - viewControllerToPresent: 要显示的视图
+    ///   - config: 弹窗配置
+    ///   - completion: 完成回调
+    public func popupPresent<ViewType>(_ viewToPresent: ViewType, animated: Bool, completion: (() -> Void)?) where ViewType: UIView, ViewType: PopupableType {
+        let vc = PopupViewController<ViewType>(popupView: viewToPresent)
+        popupPresent(vc, animated: animated, completion: completion)
+    }
+}
+
+/// 弹窗位置布局配置
+public enum PopupLayout {
+    /// 如果size 为 nil 将会调用 view.systemLayoutSizeFitting方法计算大小
+    case fullscreen
+    case center(size: CGSize? = nil)
+    case topLeft(size: CGSize? = nil)
+    case topCenter(size: CGSize? = nil)
+    case topRight(size: CGSize? = nil)
+    case bottomLeft(size: CGSize? = nil)
+    case bottomCenter(size: CGSize? = nil)
+    case bottomRight(size: CGSize? = nil)
+    case leftCenter(size: CGSize? = nil)
+    case rightCenter(size: CGSize? = nil)
+    case custom(frame: CGRect) // 自定义位置和大小
+}
+
+/// 弹窗配置
+public struct PopupConfig {
+    /// 弹出布局，默认 .center(size: nil)
+    public var layout: PopupLayout = .center(size: nil)
+    /// 弹出视图与屏幕边缘的边距，当layout 为 custom 时无效，默认为0
+    public var contentInset: UIEdgeInsets = .zero
+    /// 是否填充安全区域，当layout 为 custom 时无效，默认true
+    public var fillSafeArea = true
+    /// 是否打开点击遮罩区域来隐藏视图，默认false
+    public var allowDismissByTapDimmingView: Bool = true
+    /// 是否允许使用滑动手势来隐藏视图默认false
+    public var allowDismissByPanGesture: Bool = true
+
+    /// dismiss动画参数
+    public var animationForDismiss: PopControllerAnimation.Animation = .init(duration: 0.3, type: .fade, options: [.curveLinear])
+
+    /// present动画参数
+    public var animationForPresent: PopControllerAnimation.Animation = .init(duration: 0.3, type: .enlarge, options: [.curveEaseInOut])
+
+    /// 自定义遮罩视图，默认为透明度为0.3的黑色UIView
+    /// 可以是任何UIView的子类,设置为nil即为不显示遮罩视图，此时不会遮挡父级控制器，父级控制器可操作。
+    /// 如果既要不显示遮罩，又要父级控制器不可点击，清设置为透明度为0的UIView
+    public var dimmingView: UIView? = {
+        let view = UIView()
+        view.backgroundColor = .black.withAlphaComponent(0.3)
+        return view
+    }()
+
+    public init() {}
+}
+
+/// 用于弹出UIView的控制器
+private class PopupViewController<ViewType>: UIViewController, PopupableType where ViewType: PopupableType, ViewType: UIView {
+    var popupView: ViewType
+
+    var popupConfig: PopupConfig {
+        return popupView.popupConfig
+    }
+
+    init(popupView: ViewType) {
+        self.popupView = popupView
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .clear
+        view.addSubview(popupView)
+        popupView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
 
-    /// 当layout 为 custom 时无效
-    open var contentInset: UIEdgeInsets = .zero {
-        didSet {
-            popPresentationController?.contentInset = contentInset
-        }
+    func popupControllerWillDismissByGesture() -> Bool {
+        return popupView.popupControllerWillDismissByGesture()
     }
+}
 
-    /// 是否填充安全区域，当layout 为 custom 时无效
-    open var fillSafeArea = true {
-        didSet {
-            popPresentationController?.fillSafeArea = fillSafeArea
-        }
-    }
+/// 弹窗控制
+class PopupController: NSObject {
+    let config: PopupConfig
 
-    /// 点击遮罩隐藏视图
-    open var tapDimmingViewTodismiss: Bool = false {
-        didSet {
-            popPresentationController?.dismissDimmingViewTapGesture.isEnabled = tapDimmingViewTodismiss
-        }
-    }
+    // MARK: 私有属性
 
-    open var gestureToDismiss: Bool = false {
-        didSet {
-            if gestureToDismiss != oldValue {
-                setupInteractionDismiss()
-            }
-        }
-    }
-
-    open var dimmingView: UIView?
-
-    open var popPresentationController: PopPresentationController?
-    open var dismissedAnimationController: PopControllerAnimation = .init(duration: 0.3, animation: .fade, direction: .dismiss)
-    open var presentedAnimationController: PopControllerAnimation = .init(duration: 0.3, animation: .enlarge, direction: .present)
+    private var viewController: UIViewController
+    private var dismissedAnimation: PopControllerAnimation
+    private var presentedAnimation: PopControllerAnimation
 
     private var isInGesture = false
     private var panGesture: UIPanGestureRecognizer?
     private var interactionController: UIPercentDrivenInteractiveTransition?
     private var gesturePercentCurrentDenominator: CGFloat = 1
 
-    public required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        transitioningDelegate = self
-        modalPresentationStyle = .custom
-    }
-
-    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        transitioningDelegate = self
-        modalPresentationStyle = .custom
-    }
-    
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor(light: .white, dark: .black)
+    init(viewController: UIViewController, config: PopupConfig) {
+        self.viewController = viewController
+        dismissedAnimation = .init(animation: config.animationForDismiss, direction: .dismiss)
+        presentedAnimation = .init(animation: config.animationForPresent, direction: .present)
+        self.config = config
+        super.init()
     }
 
     private func setupInteractionDismiss() {
-        guard gestureToDismiss else {
+        guard config.allowDismissByPanGesture else {
             if let gesture = panGesture {
                 gesture.isEnabled = false
-                view.removeGestureRecognizer(gesture)
+                viewController.view.removeGestureRecognizer(gesture)
                 panGesture = nil
             }
             interactionController = nil
@@ -92,40 +173,34 @@ open class PopController: BSKViewController {
         panGesture = gesture
         interactionController = UIPercentDrivenInteractiveTransition()
         interactionController?.completionSpeed = 0.7
-        view.addGestureRecognizer(gesture)
-    }
-
-    /// 即将被手势隐藏时调用，返回false阻止手势隐藏
-    /// - Returns: 返回一个Bool决定是否允许dismiss操作,默认返回true
-    open func willDismissByGesture() -> Bool {
-        return true
+        viewController.view.addGestureRecognizer(gesture)
     }
 
     @objc private func dismissPangestureAction(_ gesture: UIPanGestureRecognizer) {
         if gesture.state == .began {
             isInGesture = true
             gesturePercentCurrentDenominator = { () -> CGFloat in
-                switch self.dismissedAnimationController.animation {
+                switch self.dismissedAnimation.animationParameters.type {
                 case .left:
-                    return self.view.frame.maxX
+                    return self.viewController.view.frame.maxX
                 case .right:
-                    return (self.view.window?.frame.width ?? 0) - self.view.frame.minX
+                    return (self.viewController.view.window?.frame.width ?? 0) - self.viewController.view.frame.minX
                 case .flowFromTop: fallthrough
                 case .top:
-                    return self.view.frame.maxY
+                    return self.viewController.view.frame.maxY
                 case .shrink: fallthrough
                 case .fade: fallthrough
                 case .enlarge: fallthrough
                 case .flowFromBottom: fallthrough
                 case .bottom:
-                    return ((self.view.window?.frame.height ?? 0) - self.view.frame.minY)
+                    return ((self.viewController.view.window?.frame.height ?? 0) - self.viewController.view.frame.minY)
                 }
             }()
-            dismiss(animated: true, completion: nil)
+            viewController.dismiss(animated: true, completion: nil)
         } else if gesture.state == .changed {
-            let trans = gesture.translation(in: view.window)
+            let trans = gesture.translation(in: viewController.view.window)
             let molecular = { () -> CGFloat in
-                switch self.dismissedAnimationController.animation {
+                switch self.dismissedAnimation.animationParameters.type {
                 case .left:
                     return trans.x > 0 ? 0 : abs(trans.x)
                 case .right:
@@ -147,9 +222,9 @@ open class PopController: BSKViewController {
             if (interactionController?.percentComplete ?? 0) > 0.5 {
                 shouldFinish = true
             } else {
-                let v = gesture.velocity(in: view)
+                let v = gesture.velocity(in: viewController.view)
                 shouldFinish = { () -> Bool in
-                    switch self.dismissedAnimationController.animation {
+                    switch self.dismissedAnimation.animationParameters.type {
                     case .left:
                         return v.x < -20
                     case .right:
@@ -167,7 +242,7 @@ open class PopController: BSKViewController {
                 }()
             }
 
-            if shouldFinish && willDismissByGesture() {
+            if shouldFinish, let popupable = viewController as? PopupableType, popupable.popupControllerWillDismissByGesture() {
                 interactionController?.finish()
             } else {
                 interactionController?.cancel()
@@ -177,13 +252,13 @@ open class PopController: BSKViewController {
     }
 }
 
-extension PopController: UIGestureRecognizerDelegate {
+extension PopupController: UIGestureRecognizerDelegate {
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         guard let gesture = gestureRecognizer as? UIPanGestureRecognizer, gesture == panGesture else {
             return false
         }
-        let trans = gesture.translation(in: view)
-        switch dismissedAnimationController.animation {
+        let trans = gesture.translation(in: viewController.view)
+        switch dismissedAnimation.animationParameters.type {
         case .left:
             return trans.x < 0
         case .right:
@@ -206,10 +281,10 @@ extension PopController: UIGestureRecognizerDelegate {
         }
         guard let otherView = otherGestureRecognizer.view as? UIScrollView,
               otherView.bounces == false,
-              self.view.subviews.contains(otherView) else {
+              self.viewController.view.subviews.contains(otherView) else {
             return false
         }
-        switch self.dismissedAnimationController.animation {
+        switch self.dismissedAnimation.animationParameters.type {
         case .left:
             return otherView.contentOffset.x == otherView.contentSize.width - otherView.frame.width
         case .right:
@@ -227,38 +302,26 @@ extension PopController: UIGestureRecognizerDelegate {
     }
 }
 
-extension PopController: UIViewControllerTransitioningDelegate {
+extension PopupController: UIViewControllerTransitioningDelegate {
     public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         let controller = PopPresentationController(presentedViewController: presented, presenting: presenting)
-        controller.layout = layout
-        controller.contentInset = contentInset
-        controller.fillSafeArea = fillSafeArea
-        controller.showDimmingView = showDimmingView
-        if showDimmingView {
-            if let dimmingView = self.dimmingView {
-                controller.dimmingView = dimmingView
-            } else {
-                dimmingView = controller.dimmingView
-            }
+        controller.layout = config.layout
+        controller.contentInset = config.contentInset
+        controller.fillSafeArea = config.fillSafeArea
+        controller.dimmingView = config.dimmingView
+        setupInteractionDismiss()
+        if config.allowDismissByTapDimmingView {
+            controller.dismissDimmingViewTapGesture.isEnabled = config.allowDismissByTapDimmingView
         }
-        if tapDimmingViewTodismiss {
-            controller.dismissDimmingViewTapGesture.isEnabled = tapDimmingViewTodismiss
-        }
-        popPresentationController = controller
         return controller
     }
 
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if isInGesture {
-            dismissedAnimationController.options = [.curveLinear]
-        } else {
-            dismissedAnimationController.options = [.curveEaseInOut]
-        }
-        return dismissedAnimationController
+        return dismissedAnimation
     }
 
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return presentedAnimationController
+        return presentedAnimation
     }
 
     public func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
@@ -266,38 +329,20 @@ extension PopController: UIViewControllerTransitioningDelegate {
     }
 }
 
-open class PopPresentationController: UIPresentationController {
-    /// 如果size 为 nil 将会调用 view.systemLayoutSizeFitting方法计算大小
-    public enum Layout {
-        case fill
-        case center(size: CGSize? = nil)
-        case topLeft(size: CGSize? = nil)
-        case topCenter(size: CGSize? = nil)
-        case topRight(size: CGSize? = nil)
-        case bottomLeft(size: CGSize? = nil)
-        case bottomCenter(size: CGSize? = nil)
-        case bottomRight(size: CGSize? = nil)
-        case leftCenter(size: CGSize? = nil)
-        case rightCenter(size: CGSize? = nil)
-        case custom(frame: CGRect)
-    }
+// MARK: - PopPresentationController
 
-    fileprivate lazy var dimmingView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .black.withAlphaComponent(0.2)
-        return view
-    }()
+private class PopPresentationController: UIPresentationController {
+    fileprivate var dimmingView: UIView?
 
     /// 点击遮罩取消弹窗，默认关闭，将它的isEnable设为true启用
     private(set) lazy var dismissDimmingViewTapGesture: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissDimmingViewTapGestureAction))
-        dimmingView.addGestureRecognizer(gesture)
+        dimmingView?.addGestureRecognizer(gesture)
         return gesture
     }()
 
-    open var showDimmingView: Bool = true
     /// 布局
-    open var layout: Layout = .center(size: nil)
+    open var layout: PopupLayout = .center(size: nil)
     /// 是否填充安全区域，当layout 为 custom 时无效
     open var fillSafeArea = false
     /// 内容边距，当layout 为 custom 时无效
@@ -311,7 +356,7 @@ open class PopPresentationController: UIPresentationController {
         guard let containerView = self.containerView else {
             return
         }
-        if showDimmingView {
+        if let dimmingView = self.dimmingView {
             dimmingView.translatesAutoresizingMaskIntoConstraints = false
             containerView.insertSubview(dimmingView, at: 0)
             dimmingView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
@@ -336,14 +381,14 @@ open class PopPresentationController: UIPresentationController {
                     return
                 }
                 coordinator.animate(alongsideTransition: { _ in
-                    self.dimmingView.alpha = 1.0
+                    dimmingView.alpha = 1.0
                 })
             }
         }
     }
 
     override open func dismissalTransitionWillBegin() {
-        if showDimmingView {
+        if let dimmingView = self.dimmingView {
             if let efectView = dimmingView as? UIVisualEffectView {
                 guard let coordinator = presentedViewController.transitionCoordinator else {
                     efectView.effect = nil
@@ -358,7 +403,7 @@ open class PopPresentationController: UIPresentationController {
                     return
                 }
                 coordinator.animate(alongsideTransition: { _ in
-                    self.dimmingView.alpha = 0.0
+                    dimmingView.alpha = 0.0
                 })
             }
         }
@@ -444,8 +489,8 @@ open class PopPresentationController: UIPresentationController {
 
         var targetFrame: CGRect = .zero
         switch layout {
-        case .fill:
-            targetFrame = self.containerView?.bounds ?? UIScreen.main.bounds
+        case .fullscreen:
+            targetFrame = containerView?.bounds ?? UIScreen.main.bounds.inset(by: contentInset)
         case let .center(size):
             targetFrame.size = size ?? defaultSize
             targetFrame.origin = CGPoint(x: centerX(with: targetFrame.size), y: centerY(with: targetFrame.size))
@@ -521,8 +566,8 @@ open class PopPresentationController: UIPresentationController {
     }
 
     @objc private func dismissDimmingViewTapGestureAction() {
-        if let vc = presentedViewController as? PopController {
-            if vc.willDismissByGesture() {
+        if let popupable = presentedViewController as? PopupableType {
+            if popupable.popupControllerWillDismissByGesture() {
                 presentedViewController.dismiss(animated: true, completion: nil)
             }
         } else {
@@ -531,37 +576,50 @@ open class PopPresentationController: UIPresentationController {
     }
 }
 
+// MARK: - PopControllerAnimation
+
 open class PopControllerAnimation: NSObject, UIViewControllerAnimatedTransitioning {
-    open var duration: CGFloat = 0.3
+    public struct Animation {
+        public var duration: CGFloat
 
-    open var animation: Animation = .enlarge
+        public var type: AnimationType
 
-    open var direction: Direction = .present
+        public var options: UIView.AnimationOptions
 
-    open var options: UIView.AnimationOptions = [.curveEaseInOut]
+        public var springDampingRatio: CGFloat?
 
-    open var dampingRatio: CGFloat
+        public var initialSpringVelocity: CGFloat?
 
-    open var velocity: CGFloat
+        public init(duration: CGFloat, type: AnimationType, options: UIView.AnimationOptions) {
+            self.duration = duration
+            self.type = type
+            self.options = options
+            springDampingRatio = nil
+            initialSpringVelocity = nil
+        }
 
-    public enum Direction {
-        case present
-        case dismiss
+        public init(duration: CGFloat, type: AnimationType, options: UIView.AnimationOptions, springDampingRatio: CGFloat?, initialSpringVelocity: CGFloat?) {
+            self.duration = duration
+            self.type = type
+            self.options = options
+            self.springDampingRatio = springDampingRatio
+            self.initialSpringVelocity = initialSpringVelocity
+        }
     }
 
-    public enum Animation: CaseIterable {
+    public enum AnimationType {
         // 缩小
         case shrink
         // 放大
         case enlarge
         // 左边
-        case left
+        case left(fade: Bool)
         // 右边
-        case right
+        case right(fade: Bool)
         // 上边
-        case top
+        case top(fade: Bool)
         // 下边
-        case bottom
+        case bottom(fade: Bool)
         // 从下浮动
         case flowFromBottom
         // 从上浮动
@@ -570,17 +628,23 @@ open class PopControllerAnimation: NSObject, UIViewControllerAnimatedTransitioni
         case fade
     }
 
-    public init(duration: CGFloat, animation: Animation, direction: Direction, usingSpringWithDamping dampingRatio: CGFloat = 1, initialSpringVelocity velocity: CGFloat = 0) {
-        self.duration = duration
-        self.animation = animation
+    public enum Direction {
+        case present
+        case dismiss
+    }
+
+    open var direction: Direction = .present
+
+    open var animationParameters: Animation
+
+    public init(animation: Animation, direction: Direction) {
+        animationParameters = animation
         self.direction = direction
-        self.dampingRatio = dampingRatio
-        self.velocity = velocity
         super.init()
     }
 
     open func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return duration
+        return animationParameters.duration
     }
 
     open func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -603,7 +667,7 @@ open class PopControllerAnimation: NSObject, UIViewControllerAnimatedTransitioni
         let toTransform: CGAffineTransform = .identity
         let toAlpha: CGFloat = 1
 
-        if let controller = vc.presentationController as? PopPresentationController, !controller.showDimmingView {
+        if let controller = vc.presentationController as? PopPresentationController, controller.dimmingView == nil {
             let frame = controller.finalFrame(ofContainer: true)
             transitionContext.containerView.frame = frame
         }
@@ -615,27 +679,39 @@ open class PopControllerAnimation: NSObject, UIViewControllerAnimatedTransitioni
         vc.view.frame = fromFrame
         transitionContext.containerView.addSubview(vc.view)
 
-        switch animation {
+        switch animationParameters.type {
         case .shrink:
             fromTransform = .init(scaleX: 0.1, y: 0.1)
             fromAlpha = 0
         case .enlarge:
             fromTransform = .init(scaleX: 1.3, y: 1.3)
             fromAlpha = 0
-        case .left:
+        case let .left(fade):
+            if fade {
+                fromAlpha = 0
+            }
             fromFrame.origin.x = -finalFrame.width
-        case .right:
+        case let .right(fade):
+            if fade {
+                fromAlpha = 0
+            }
             fromFrame.origin.x = transitionContext.containerView.bounds.width
-        case .top:
+        case let .top(fade):
+            if fade {
+                fromAlpha = 0
+            }
             fromFrame.origin.y = -finalFrame.height
+        case let .bottom(fade):
+            if fade {
+                fromAlpha = 0
+            }
+            fromFrame.origin.y = transitionContext.containerView.bounds.height
         case .flowFromTop:
             fromFrame.origin.y = finalFrame.origin.y - 70
             fromAlpha = 0
         case .flowFromBottom:
             fromFrame.origin.y = finalFrame.origin.y + 70
             fromAlpha = 0
-        case .bottom:
-            fromFrame.origin.y = transitionContext.containerView.bounds.height
         case .fade:
             fromAlpha = 0
         }
@@ -643,12 +719,21 @@ open class PopControllerAnimation: NSObject, UIViewControllerAnimatedTransitioni
         vc.view.frame = fromFrame
         vc.view.alpha = fromAlpha
         vc.view.transform = fromTransform
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, usingSpringWithDamping: dampingRatio, initialSpringVelocity: velocity, options: options) {
+
+        let animationBlock = {
             vc.view.transform = toTransform
             vc.view.frame = finalFrame
             vc.view.alpha = toAlpha
-        } completion: { finish in
-            transitionContext.completeTransition(finish)
+        }
+
+        if let springDampingRatio = animationParameters.springDampingRatio, let initialSpringVelocity = animationParameters.initialSpringVelocity {
+            UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, usingSpringWithDamping: springDampingRatio, initialSpringVelocity: initialSpringVelocity, options: animationParameters.options, animations: animationBlock, completion: { finish in
+                transitionContext.completeTransition(finish)
+            })
+        } else {
+            UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: animationParameters.options, animations: animationBlock, completion: { finish in
+                transitionContext.completeTransition(finish)
+            })
         }
     }
 
@@ -668,27 +753,39 @@ open class PopControllerAnimation: NSObject, UIViewControllerAnimatedTransitioni
         vc.view.frame = fromFrame
         transitionContext.containerView.addSubview(vc.view)
 
-        switch animation {
+        switch animationParameters.type {
         case .shrink:
             toTransform = .init(scaleX: 0.1, y: 0.1)
             toAlpha = 0
         case .enlarge:
             toTransform = .init(scaleX: 1.3, y: 1.3)
             toAlpha = 0
-        case .left:
+        case let .left(fade):
+            if fade {
+                toAlpha = 0
+            }
             finalFrame.origin.x = -finalFrame.width
-        case .right:
+        case let .right(fade):
+            if fade {
+                toAlpha = 0
+            }
             finalFrame.origin.x = transitionContext.containerView.bounds.width
-        case .top:
+        case let .top(fade):
+            if fade {
+                toAlpha = 0
+            }
             finalFrame.origin.y = -finalFrame.height
+        case let .bottom(fade):
+            if fade {
+                toAlpha = 0
+            }
+            finalFrame.origin.y = transitionContext.containerView.bounds.height
         case .flowFromTop:
             finalFrame.origin.y = fromFrame.origin.y - 70
             toAlpha = 0
         case .flowFromBottom:
             finalFrame.origin.y = fromFrame.origin.y + 70
             toAlpha = 0
-        case .bottom:
-            finalFrame.origin.y = transitionContext.containerView.bounds.height
         case .fade:
             toAlpha = 0
         }
@@ -696,17 +793,30 @@ open class PopControllerAnimation: NSObject, UIViewControllerAnimatedTransitioni
         vc.view.frame = fromFrame
         vc.view.alpha = fromAlpha
         vc.view.transform = fromTransform
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: options) {
+
+        let animationBlock = {
             vc.view.frame = finalFrame
             vc.view.alpha = toAlpha
             vc.view.transform = toTransform
-        } completion: { _ in
+        }
+
+        let completionBlock = {
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             if transitionContext.transitionWasCancelled {
                 vc.view.frame = fromFrame
                 vc.view.alpha = fromAlpha
                 vc.view.transform = fromTransform
             }
+        }
+
+        if let springDampingRatio = animationParameters.springDampingRatio, let initialSpringVelocity = animationParameters.initialSpringVelocity {
+            UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, usingSpringWithDamping: springDampingRatio, initialSpringVelocity: initialSpringVelocity, options: animationParameters.options, animations: animationBlock, completion: { _ in
+                completionBlock()
+            })
+        } else {
+            UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: animationParameters.options, animations: animationBlock, completion: { _ in
+                completionBlock()
+            })
         }
     }
 }

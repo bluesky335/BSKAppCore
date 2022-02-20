@@ -5,12 +5,11 @@
 //  Created by 刘万林 on 2021/11/29.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 #if SPM
-import BSKUtils
+    import BSKUtils
 #endif
-
 
 /// 定义Alert弹框的按钮
 class AlertAction {
@@ -61,7 +60,10 @@ class AlertAction {
     }
 }
 
-class AlertViewController: PopController {
+class AlertViewController: BSKViewController, PopupableType {
+    
+    var popupConfig = PopupConfig()
+    
     /// 类型
     enum Style: Int {
         case actionSheet = 0
@@ -85,8 +87,8 @@ class AlertViewController: PopController {
     /// 背景 Effect
     open var backgroundEfect: UIVisualEffect = UIBlurEffect(style: .regular)
     /// 滚动时最大可见的按钮数量，可以是小数
-    open var maxVisibleActionCountScroll:CGFloat = 6
-    
+    open var maxVisibleActionCountScroll: CGFloat = 6
+
     private(set) lazy var contentView: UIView = {
         self.contentViewLoadid = true
         return UIView()
@@ -186,14 +188,14 @@ class AlertViewController: PopController {
         case .alert:
             /// 按钮高度
             buttonHeight = 45
-            contentInset = UIEdgeInsets(top: 16, left: 50, bottom: 16, right: 50)
-            layout = .center(size: nil)
+            popupConfig.contentInset = UIEdgeInsets(top: 16, left: 50, bottom: 16, right: 50)
+            popupConfig.layout = .center(size: nil)
             maxVisibleActionCountScroll = 6.5
         case .actionSheet:
             /// 按钮高度
             buttonHeight = 55
-            contentInset = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
-            layout = .bottomCenter(size: nil)
+            popupConfig.contentInset = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
+            popupConfig.layout = .bottomCenter(size: nil)
             maxVisibleActionCountScroll = 4.5
         }
         if let title = title {

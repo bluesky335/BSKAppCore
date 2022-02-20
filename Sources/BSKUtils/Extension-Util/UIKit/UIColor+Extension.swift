@@ -13,11 +13,11 @@ extension UIColor {
     ///   - defaultColor: 默认颜色
     ///   - dark: 深色模式的颜色
     public convenience init(light defaultColor: UIColor, dark: UIColor? = nil) {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), let darkColor = dark {
             self.init { (collection) -> UIColor in
                 switch collection.userInterfaceStyle {
                 case .dark:
-                    return dark ?? defaultColor
+                    return darkColor
                 default:
                     return defaultColor
                 }
@@ -50,7 +50,7 @@ extension UIColor {
     public convenience init(R: UInt8, G: UInt8, B: UInt8, alpha: CGFloat) {
         self.init(red: CGFloat(R) / 255.0, green: CGFloat(G) / 255.0, blue: CGFloat(B) / 255.0, alpha: alpha)
     }
-    
+
     /// UIColor初始化：
     /// - Parameters:
     ///   - hexStr: 16进制颜色字符串，大小写不区分，#可以不输入，举例 "#00FF00" 或者"00ff00"
@@ -79,33 +79,44 @@ extension UIColor {
 
 // MARK: - RGBA Color CGFloat
 
+public struct RGBAColor: Codable,Equatable {
+    public var red: CGFloat
+    public var green: CGFloat
+    public var blue: CGFloat
+    public var alpha: CGFloat
+
+    public var uicolor: UIColor {
+        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+    }
+}
+
 extension UIColor {
-    public var RGBA: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+    public var rgbaColor: RGBAColor {
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
         var a: CGFloat = 0
-        self.getRed(&r, green: &g, blue: &b, alpha: &a)
-        return (r, g, b, a)
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        return RGBAColor(red: r, green: g, blue: b, alpha: a)
     }
 
     public func with(red: CGFloat) -> UIColor {
-        let rgba = RGBA
+        let rgba = rgbaColor
         return UIColor(red: red, green: rgba.green, blue: rgba.blue, alpha: rgba.alpha)
     }
 
     public func with(green: CGFloat) -> UIColor {
-        let rgba = RGBA
+        let rgba = rgbaColor
         return UIColor(red: rgba.red, green: green, blue: rgba.blue, alpha: rgba.alpha)
     }
 
     public func with(blue: CGFloat) -> UIColor {
-        let rgba = RGBA
+        let rgba = rgbaColor
         return UIColor(red: rgba.red, green: rgba.green, blue: blue, alpha: rgba.alpha)
     }
 
     public func with(alpha: CGFloat) -> UIColor {
-        let rgba = RGBA
+        let rgba = rgbaColor
         return UIColor(red: rgba.red, green: rgba.green, blue: rgba.blue, alpha: alpha)
     }
 }
@@ -150,29 +161,40 @@ extension UIColor {
 
 // MARK: - HSBA Color
 
+public struct HSBAColor: Codable {
+    public var hue: CGFloat
+    public var saturation: CGFloat
+    public var brightness: CGFloat
+    public var alpha: CGFloat
+
+    public var uicolor: UIColor {
+        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
+    }
+}
+
 extension UIColor {
     // 返回HSBA模式颜色值
-    public var HSBA: (hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+    public var hsbaColor: HSBAColor {
         var h: CGFloat = 0
         var s: CGFloat = 0
         var b: CGFloat = 0
         var a: CGFloat = 0
-        self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-        return (h, s, b, a)
+        getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return HSBAColor(hue: h, saturation: s, brightness: b, alpha: a)
     }
 
     public func with(brightness: CGFloat) -> UIColor {
-        let hsba = HSBA
+        let hsba = hsbaColor
         return UIColor(hue: hsba.hue, saturation: hsba.saturation, brightness: brightness, alpha: hsba.alpha)
     }
 
     public func with(hue: CGFloat) -> UIColor {
-        let hsba = HSBA
+        let hsba = hsbaColor
         return UIColor(hue: hue, saturation: hsba.saturation, brightness: hsba.brightness, alpha: hsba.alpha)
     }
 
     public func with(saturation: CGFloat) -> UIColor {
-        let hsba = HSBA
+        let hsba = hsbaColor
         return UIColor(hue: hsba.hue, saturation: saturation, brightness: hsba.brightness, alpha: hsba.alpha)
     }
 }
