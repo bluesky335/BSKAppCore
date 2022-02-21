@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIColor {
-    /// 动态颜色
+    /// 快速创建动态颜色
     /// - Parameters:
     ///   - defaultColor: 默认颜色
     ///   - dark: 深色模式的颜色
@@ -79,7 +79,8 @@ extension UIColor {
 
 // MARK: - RGBA Color CGFloat
 
-public struct RGBAColor: Codable,Equatable {
+/// RGBA格式的颜色，用红绿蓝和透明度来表示的颜色格式，每个值都是0～1之间的浮点数
+public struct RGBAColor: Codable, Equatable {
     public var red: CGFloat
     public var green: CGFloat
     public var blue: CGFloat
@@ -161,7 +162,8 @@ extension UIColor {
 
 // MARK: - HSBA Color
 
-public struct HSBAColor: Codable {
+/// HSBA格式的颜色，用色度饱和度亮度和透明度来表示的颜色格式，每个值都是0～1之间的浮点数
+public struct HSBAColor: Codable, Equatable {
     public var hue: CGFloat
     public var saturation: CGFloat
     public var brightness: CGFloat

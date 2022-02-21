@@ -22,7 +22,7 @@ public extension UIImage {
     /// - Returns: 新图片
     func image(withScale scale: CGFloat) -> UIImage? {
         let newSize = CGSize(width: size.width * scale, height: size.height * scale)
-        UIGraphicsBeginImageContextWithOptions(newSize, !hasAlphaChannel, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(newSize, !hasAlphaChannel, 0)
         draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -40,7 +40,7 @@ public extension UIImage {
     ///   - newSize: 新尺寸
     /// - Returns: 新图片
     func image(withSize newSize: CGSize, mode: ResizeMode = .scaleAspectFit) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(newSize, !hasAlphaChannel, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(newSize, !hasAlphaChannel, 0)
         var imageRect = CGRect.zero
         switch mode {
         case .scaleToFill:

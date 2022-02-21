@@ -22,6 +22,7 @@ public protocol BSKKeyboardListenerDelegate {
 
     func keyboardDidHide(_ keyboardInfo: BSKKeyboardListener.KeyboardInfo)
 }
+
 /// 默认实现
 public extension BSKKeyboardListenerDelegate {
     func keyboardWillChangeFrame(_ keyboardInfo: BSKKeyboardListener.KeyboardInfo) {}

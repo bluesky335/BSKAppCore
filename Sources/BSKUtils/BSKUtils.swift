@@ -6,6 +6,7 @@
 
 import UIKit
 
+/// 一些工具方法
 public class BSKUtils: NSObject {
     public enum FileType: String {
         case image_jpg = "image/jpeg"
@@ -59,30 +60,11 @@ public class BSKUtils: NSObject {
             return .unknown
         }
     }
-
-
-    public static func Fen2Yuan(fen: String) -> String? {
-        guard let fenNumber = Decimal(string: fen),
-              let hundred = Decimal(string: "100")
-        else {
-            return nil
-        }
-        let resault = fenNumber / hundred
-        return resault.description
-    }
-
-    public static func Yuan2Fen(yuan: String) -> String? {
-        guard let fenNumber = Decimal(string: yuan),
-              let hundred = Decimal(string: "100")
-        else {
-            return nil
-        }
-        let resault = fenNumber * hundred
-        return resault.description
-    }
 }
 
 
+/// 保证在主线程中执行代码
+/// - Parameter block: 要执行的代码
 public func MainThread( _ block: @escaping () -> Void) {
     if Thread.isMainThread {
         block()

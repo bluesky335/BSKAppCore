@@ -54,6 +54,7 @@ public extension DataConvertAble {
         return res.bsk.hexString
     }
 
+    @available(iOS, introduced: 2.0, deprecated: 13.0, message: "CommonCrypto库中的MD5算法在iOS13中已被废弃，请使用sha相关的摘要算法")
     var MD5: String {
         let data = dataValue as NSData
         var hash = [UInt8].init(repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))

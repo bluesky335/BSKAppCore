@@ -22,12 +22,14 @@ let package = Package(
         .library(name: "BSKLogConsole", targets: ["BSKLogConsole"]),
     ],
     dependencies:[
+        .package(name:"SnapKit",url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1"))
     ],
     targets: [
         .target(name: "BSKAppCore",
                 dependencies: [
                     "BSKUtils",
                     "BSKLog",
+                    "SnapKit"
                 ],
                 resources: [
                     .copy("./MapTool/JZLocation/GCJ02.json.data")

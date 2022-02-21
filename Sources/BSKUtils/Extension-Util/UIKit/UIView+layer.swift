@@ -115,4 +115,17 @@ extension UIView {
             layer.shadowPath = newValue
         }
     }
+    
+    /// 添加阴影
+    /// - Parameters:
+    ///   - color: 颜色
+    ///   - opacity: 透明度
+    ///   - radius: 半径
+    ///   - offset: 偏移
+    func addShadow(color: UIColor, opacity: CGFloat, radius: CGFloat, offset: CGSize) {
+        self.shadowColor = color
+        self.shadowOpacity = opacity
+        self.shadowRadius = radius
+        self.shadowOffset = offset
+    }
 }

@@ -31,6 +31,7 @@ public struct AppInfo {
     }
 }
 
+/// 设备信息
 struct DeviceInfo {
     private init() {}
     // 系统版本

@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
     'JsonFiles' => ["Sources/BSKAppCore/**/*.json"]
   }
 
-  s.dependency 'SnapKit'
+  s.dependency 'SnapKit', '~> 5.0.0'
 
   s.public_header_files = ["Sources/BSKAppCore.h"]
   s.requires_arc = true

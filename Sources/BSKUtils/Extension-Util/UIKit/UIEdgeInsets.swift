@@ -8,11 +8,13 @@
 import UIKit
 
 public extension UIEdgeInsets {
+    /// 横向的值，left+right
     var horizontal: CGFloat {
-        return self.left + self.right
+        return left + right
     }
 
+    /// 纵向的值，top+bottom
     var vertical: CGFloat {
-        return self.top + self.bottom
+        return top + bottom
     }
 }

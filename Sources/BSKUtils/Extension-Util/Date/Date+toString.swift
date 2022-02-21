@@ -27,7 +27,10 @@ public extension BSKExtension where Base == Date {
         }
         return dateFormater.string(from: base)
     }
-
+    
+    /// 根据与现在的距离只能点转换成描述字符串，比如15分钟以前、昨天 14:25、明天 12:10等等
+    /// - Parameter locale: 国际化
+    /// - Returns: 字符串
     func toSmartString(locale: Locale = .current) -> String {
 
         var calendar = Calendar.current

@@ -1,6 +1,6 @@
 //
 //  String+RegularExpression.swift
-//  BSKToolBox-Swift
+//  
 //
 //  Created by BlueSky335 on 2018/4/26.
 //  Copyright © 2018年 LiuWanLin. All rights reserved.
@@ -90,11 +90,6 @@ public extension BSKExtension where Base == String {
     /// 是否是电子邮件地址
     var isEmailAddress: Bool {
         return isMatch(regex: "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$")
-    }
-
-    /// 是否是正确身份证
-    var isIDCardNumber: Bool {
-        return isMatch(regex: "^(\\d{14}|\\d{17})(\\d|[xX])$")
     }
 
     /// 如果为"true"或者为非零的数字返回 true 其他返回 false

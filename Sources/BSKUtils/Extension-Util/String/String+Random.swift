@@ -7,7 +7,7 @@ import Foundation
 
 public extension BSKExtension where Base == String {
     
-    /// 随机生成包含字母和数字的字符串
+    /// 随机生成包含字母和数字的字符串(有可能有重复的字符）
     ///
     /// - Parameter length: 字符串长度
     /// - Returns: 生成的字符串
@@ -25,7 +25,7 @@ public extension BSKExtension where Base == String {
     }
 
     
-    /// 从当前字符串中的字符中随机生成字符串
+    /// 从当前字符串中的字符中随机生成字符串(有可能有重复的字符）
     ///
     /// - Parameter length: 随机字符串长度
     /// - Returns: 生成的字符串
