@@ -91,7 +91,7 @@ extension BSKLogFileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.imageView?.image = UIImage(inFramwork: "log_file")?.apply(gradientColors: [.white, .white])
+        cell.imageView?.image = UIImage(inFramwork: "log_file")?.withTintColor(.white)
         #if targetEnvironment(macCatalyst)
             cell.textLabel?.text = try? logs[indexPath.section].files[indexPath.row].path.subString(from: Bundle.main.bundleIdentifier ?? "")
         #else

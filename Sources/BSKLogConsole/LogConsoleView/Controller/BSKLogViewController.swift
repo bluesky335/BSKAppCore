@@ -45,7 +45,7 @@ class BSKLogViewController: LogBaseViewController {
         search.placeholder = "搜索"
         search.barStyle = .black
         search.delegate = self
-        let image = UIImage(inFramwork: "log_search")?.apply(gradientColors: [.lightGray, .lightGray])
+        let image = UIImage(inFramwork: "log_search")?.withTintColor(.lightGray)
         search.setImage(image, for: .search, state: .normal)
         return search
     }()
