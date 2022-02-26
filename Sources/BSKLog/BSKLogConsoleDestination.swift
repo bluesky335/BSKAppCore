@@ -1,13 +1,13 @@
 //
 //  XcodeConsoleLogger.swift
-//  
+//
 //
 //  Created by 刘万林 on 2021/9/2.
 //
 
 import Foundation
 #if SPM
-import BSKUtils
+    import BSKUtils
 #endif
 /// 在Xcode的控制台输出日志
 open class BSKLogConsoleDestination: LogDestination {
@@ -17,10 +17,17 @@ open class BSKLogConsoleDestination: LogDestination {
     /// 单条日志显示的最大长度，过长的日志打印会导致Xcode Console 白屏，可以设置这个属性来限制输出的最大长度，默认为nil，不限制。
     open var maxLength: Int?
 
+    open var printMode: PrintMode = .print
+
+    public enum PrintMode {
+        case nslog
+        case print
+    }
+
     public init() {
     }
 
-    open func printLog(_ log:BSKLogObject) {
+    open func printLog(_ log: BSKLogObject) {
         var logStr = log.log
         let fileURL = URL(fileURLWithPath: log.file)
         let fileName = fileURL.lastPathComponent
@@ -38,6 +45,11 @@ open class BSKLogConsoleDestination: LogDestination {
         } else {
             printStr = "[\(log.level.flag)]: \(logStr)"
         }
-        NSLog(printStr)
+        switch printMode {
+        case .nslog:
+            NSLog(printStr)
+        case .print:
+            print(printStr)
+        }
     }
 }
