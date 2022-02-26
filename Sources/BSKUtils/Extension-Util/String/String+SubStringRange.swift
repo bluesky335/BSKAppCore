@@ -10,7 +10,6 @@ import Foundation
 
 /// String 扩展
 public extension String {
-    
     /// 字符串截取异常
     enum SubStringError: Error {
         case outOfRange
@@ -77,84 +76,86 @@ public extension String {
     func pathExtension() -> String {
         return URL(fileURLWithPath: self).pathExtension
     }
-
 }
 
 public extension String {
     subscript(range: ClosedRange<Int>) -> Substring {
-        let startIndex = self.index(self.startIndex, offsetBy: range.lowerBound)
-        let endIndex   = self.index(self.startIndex, offsetBy: range.upperBound)
-        return self[startIndex...endIndex]
+        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
+        let endIndex = index(self.startIndex, offsetBy: range.upperBound)
+        return self[startIndex ... endIndex]
     }
 
     subscript(range: Range<Int>) -> Substring {
         guard range.lowerBound < range.upperBound else {
             return ""
         }
-        let startIndex = self.index(self.startIndex, offsetBy: range.lowerBound)
-        let endIndex   = self.index(self.startIndex, offsetBy: range.upperBound - 1)
-        return self[startIndex...endIndex]
+        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
+        let endIndex = index(self.startIndex, offsetBy: range.upperBound - 1)
+        return self[startIndex ... endIndex]
     }
 
     subscript(range: PartialRangeThrough<Int>) -> Substring {
-        let startIndex = self.index(self.startIndex, offsetBy: 0)
-        let endIndex   = self.index(self.startIndex, offsetBy: range.upperBound)
-        return self[startIndex...endIndex]
+        let startIndex = index(self.startIndex, offsetBy: 0)
+        let endIndex = index(self.startIndex, offsetBy: range.upperBound)
+        return self[startIndex ... endIndex]
     }
 
     subscript(range: PartialRangeUpTo<Int>) -> Substring {
-        let startIndex = self.index(self.startIndex, offsetBy: 0)
-        let endIndex   = self.index(self.startIndex, offsetBy: range.upperBound - 1)
-        return self[startIndex...endIndex]
+        let startIndex = index(self.startIndex, offsetBy: 0)
+        let endIndex = index(self.startIndex, offsetBy: range.upperBound - 1)
+        return self[startIndex ... endIndex]
     }
 
     subscript(range: PartialRangeFrom<Int>) -> Substring {
-        let startIndex = self.index(self.startIndex, offsetBy: range.lowerBound)
-        let endIndex   = self.index(self.startIndex, offsetBy: self.count - 1)
-        return self[startIndex...endIndex]
+        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
+        let endIndex = index(self.startIndex, offsetBy: count - 1)
+        return self[startIndex ... endIndex]
     }
 
     subscript(i: Int) -> Character {
-        return self[self.index(self.startIndex, offsetBy: i)]
+        return self[index(startIndex, offsetBy: i)]
     }
 }
 
-
 public extension Substring {
     subscript(range: ClosedRange<Int>) -> Substring {
-        let startIndex = self.index(self.startIndex, offsetBy: range.lowerBound)
-        let endIndex   = self.index(self.startIndex, offsetBy: range.upperBound)
-        return self[startIndex...endIndex]
+        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
+        let endIndex = index(self.startIndex, offsetBy: range.upperBound)
+        return self[startIndex ... endIndex]
     }
 
     subscript(range: Range<Int>) -> Substring {
         guard range.lowerBound < range.upperBound else {
             return ""
         }
-        let startIndex = self.index(self.startIndex, offsetBy: range.lowerBound)
-        let endIndex   = self.index(self.startIndex, offsetBy: range.upperBound - 1)
-        return self[startIndex...endIndex]
+        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
+        let endIndex = index(self.startIndex, offsetBy: range.upperBound - 1)
+        return self[startIndex ... endIndex]
     }
 
     subscript(range: PartialRangeThrough<Int>) -> Substring {
-        let startIndex = self.index(self.startIndex, offsetBy: 0)
-        let endIndex   = self.index(self.startIndex, offsetBy: range.upperBound)
-        return self[startIndex...endIndex]
+        let startIndex = index(self.startIndex, offsetBy: 0)
+        let endIndex = index(self.startIndex, offsetBy: range.upperBound)
+        return self[startIndex ... endIndex]
     }
 
     subscript(range: PartialRangeUpTo<Int>) -> Substring {
-        let startIndex = self.index(self.startIndex, offsetBy: 0)
-        let endIndex   = self.index(self.startIndex, offsetBy: range.upperBound - 1)
-        return self[startIndex...endIndex]
+        let startIndex = index(self.startIndex, offsetBy: 0)
+        let endIndex = index(self.startIndex, offsetBy: range.upperBound - 1)
+        return self[startIndex ... endIndex]
     }
 
     subscript(range: PartialRangeFrom<Int>) -> Substring {
-        let startIndex = self.index(self.startIndex, offsetBy: range.lowerBound)
-        let endIndex   = self.index(self.startIndex, offsetBy: self.count - 1)
-        return self[startIndex...endIndex]
+        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
+        let endIndex = index(self.startIndex, offsetBy: count - 1)
+        return self[startIndex ... endIndex]
     }
 
     subscript(i: Int) -> Character {
-        return self[self.index(self.startIndex, offsetBy: i)]
+        return self[index(startIndex, offsetBy: i)]
+    }
+
+    var string: String {
+        return String(self)
     }
 }
