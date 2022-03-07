@@ -90,7 +90,7 @@ public struct PopupConfig {
     public var animationForDismiss: PopControllerAnimation.Animation = .init(duration: 0.3, type: .fade, options: [.curveLinear])
     
     /// dismiss手势动画参数
-    public var animationForDismissByGesture: PopControllerAnimation.Animation = .init(duration: 0.3, type: .fade, options: [.curveLinear])
+    public var animationForDismissByGesture: PopControllerAnimation.Animation?
 
     /// present动画参数
     public var animationForPresent: PopControllerAnimation.Animation = .init(duration: 0.3, type: .enlarge, options: [.curveEaseInOut])
@@ -146,7 +146,7 @@ class PopupController: NSObject {
 
     private var viewController: UIViewController
     private var dismissedAnimation: PopControllerAnimation
-    private var dismissByGestureAnimation: PopControllerAnimation
+    private var dismissByGestureAnimation: PopControllerAnimation?
     private var presentedAnimation: PopControllerAnimation
 
     private var isInGesture = false
@@ -157,7 +157,9 @@ class PopupController: NSObject {
     init(viewController: UIViewController, config: PopupConfig) {
         self.viewController = viewController
         dismissedAnimation = .init(animation: config.animationForDismiss, direction: .dismiss)
-        dismissByGestureAnimation = .init(animation: config.animationForDismissByGesture, direction: .dismiss)
+        if let animation = config.animationForDismissByGesture {
+            dismissByGestureAnimation = .init(animation: animation, direction: .dismiss)
+        }
         presentedAnimation = .init(animation: config.animationForPresent, direction: .present)
         self.config = config
         super.init()
@@ -322,7 +324,7 @@ extension PopupController: UIViewControllerTransitioningDelegate {
     }
 
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return isInGesture ? dismissByGestureAnimation : dismissedAnimation
+        return isInGesture ? dismissByGestureAnimation ?? dismissedAnimation : dismissedAnimation
     }
 
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
