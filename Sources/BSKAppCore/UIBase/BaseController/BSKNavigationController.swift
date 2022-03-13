@@ -12,10 +12,11 @@ import UIKit
 open class BSKNavigationController: UINavigationController {
     /// 协议代理，将代理事件分发到多个地方
     private var delegateProxy = ProxyUINavigationControllerDelegate()
+
     /// 将要push出来的controller
-    private var controllerWillPush: [Int: () -> Void] = [:]
+    private var pushComplateCallBack: [Int: () -> Void] = [:]
     /// 将要pop的controller
-    private var controllerWillPop: [Int: (Bool) -> Void] = [:]
+    private var popComplateCallBack: [Int: (Bool) -> Void] = [:]
 
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +79,7 @@ open class BSKNavigationController: UINavigationController {
         if !animated {
             complate(true)
         } else {
-            controllerWillPop[topVc.hash] = complate
+            popComplateCallBack[topVc.hash] = complate
         }
         return vc
     }
@@ -100,7 +101,7 @@ open class BSKNavigationController: UINavigationController {
         if !animated {
             complate(true)
         } else {
-            controllerWillPop[topVc.hash] = complate
+            popComplateCallBack[topVc.hash] = complate
         }
         return vcs
     }
@@ -123,7 +124,7 @@ open class BSKNavigationController: UINavigationController {
         if !animated {
             complate(true)
         } else {
-            controllerWillPop[topVc.hash] = complate
+            popComplateCallBack[topVc.hash] = complate
         }
         return vcs
     }
@@ -141,7 +142,7 @@ open class BSKNavigationController: UINavigationController {
         if !animated {
             complate()
         } else {
-            controllerWillPush[viewController.hash] = complate
+            pushComplateCallBack[viewController.hash] = complate
         }
     }
 }
@@ -180,13 +181,17 @@ extension BSKNavigationController: UINavigationControllerDelegate {
     }
 
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        if let complate = controllerWillPush[viewController.hash] {
+        let hash = viewController.hash
+        if let complate = pushComplateCallBack[hash] {
             complate()
-            controllerWillPush.removeValue(forKey: viewController.hash)
+            pushComplateCallBack.removeValue(forKey: hash)
         }
-        if let complate = controllerWillPop[viewController.hash] {
+        if let complate = popComplateCallBack[hash] {
             complate(true)
-            controllerWillPop.removeValue(forKey: viewController.hash)
+            popComplateCallBack.removeValue(forKey: hash)
+        }
+        viewControllers.removeAll { [weak self] vc in
+            return vc.removeSelfAfterPush() && vc != self?.topViewController
         }
     }
 }
