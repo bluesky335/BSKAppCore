@@ -32,7 +32,6 @@ let package = Package(
                     "SnapKit"
                 ],
                 resources: [
-                    .copy("./MapTool/JZLocation/GCJ02.json.data")
                 ],
                 swiftSettings:[
                     .define("SPM")
