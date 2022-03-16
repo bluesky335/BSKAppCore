@@ -178,9 +178,6 @@ extension BSKNavigationController: UINavigationControllerDelegate {
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         setNavigationBarHidden(!viewController.shouldShowNavigationBar(), animated: animated)
         setToolbarHidden(!viewController.shouldShowToolBar(), animated: animated)
-        viewControllers.removeAll { [weak self] vc in
-            return vc.removeSelfAfterPush() && vc != self?.topViewController
-        }
     }
 
     public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
@@ -192,6 +189,9 @@ extension BSKNavigationController: UINavigationControllerDelegate {
         if let complate = popComplateCallBack[hash] {
             complate(true)
             popComplateCallBack.removeValue(forKey: hash)
+        }
+        viewControllers.removeAll { [weak self] vc in
+            return vc.removeSelfAfterPush() && vc != self?.topViewController
         }
     }
 }
