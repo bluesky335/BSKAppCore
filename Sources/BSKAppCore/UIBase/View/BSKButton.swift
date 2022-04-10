@@ -41,6 +41,9 @@ open class BSKButton: UIButton {
 
     open func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         bgColorDic[state.rawValue] = color
+        if bgColorDic[UIControl.State.normal.rawValue] == nil {
+            bgColorDic[UIControl.State.normal.rawValue] = backgroundColor
+        }
         checkState()
     }
 
@@ -50,12 +53,8 @@ open class BSKButton: UIButton {
 
     private func checkState(animated: Bool = false) {
         let updateStatue = { () -> Void in
-            if let font = self.fontDic[self.state.rawValue] {
-                self.titleLabel?.font = font
-            }
-            if let color = self.bgColorDic[self.state.rawValue] {
-                self.backgroundColor = color
-            }
+            self.titleLabel?.font = self.fontDic[self.state.rawValue] ?? self.fontDic[UIControl.State.normal.rawValue]
+            super.backgroundColor = self.bgColorDic[self.state.rawValue] ?? self.bgColorDic[UIControl.State.normal.rawValue]
         }
         if animated {
             UIView.animate(withDuration: 0.3) {
@@ -63,6 +62,16 @@ open class BSKButton: UIButton {
             }
         } else {
             updateStatue()
+        }
+    }
+    
+    open override var backgroundColor: UIColor? {
+        set {
+            self.bgColorDic[UIControl.State.normal.rawValue] = newValue
+            super.backgroundColor = newValue
+        }
+        get {
+            super.backgroundColor
         }
     }
 

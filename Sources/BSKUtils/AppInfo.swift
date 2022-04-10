@@ -32,7 +32,7 @@ public struct AppInfo {
 }
 
 /// 设备信息
-struct DeviceInfo {
+public struct DeviceInfo {
     private init() {}
     // 系统版本
     public static var systemVersion: String {
