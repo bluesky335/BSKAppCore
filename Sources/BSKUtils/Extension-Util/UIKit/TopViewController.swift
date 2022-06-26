@@ -30,6 +30,22 @@ extension UITabBarController {
 
 public extension BSKExtension where Base: UIApplication {
     var topViewController: UIViewController? {
+        guard let rootVc = keyWindow?.rootViewController else { return nil }
+
+        var resultVc = rootVc
+
+        var controllers = [rootVc]
+        while controllers.count != 0 {
+            resultVc = controllers.removeFirst()
+
+            if let topvc = resultVc.topChildVC {
+                controllers.append(topvc)
+            }
+        }
+        return resultVc
+    }
+    
+    var keyWindow:UIWindow? {
         let window: UIWindow?
         if let windowScene = base.connectedScenes.compactMap({ scene in
             scene as? UIWindowScene
@@ -46,19 +62,6 @@ public extension BSKExtension where Base: UIApplication {
         } else {
             window = base.delegate?.window ?? nil
         }
-        
-        guard let rootVc = window?.rootViewController else { return nil }
-
-        var resultVc = rootVc
-
-        var controllers = [rootVc]
-        while controllers.count != 0 {
-            resultVc = controllers.removeFirst()
-
-            if let topvc = resultVc.topChildVC {
-                controllers.append(topvc)
-            }
-        }
-        return resultVc
+        return window
     }
 }

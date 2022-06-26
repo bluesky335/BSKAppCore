@@ -136,6 +136,10 @@ open class BSKNavigationController: UINavigationController {
     override open var childForStatusBarHidden: UIViewController? {
         return topViewController
     }
+    
+    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return self.topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
+    }
 
     open func pushViewController(_ viewController: UIViewController, animated: Bool, complate: @escaping () -> Void) {
         pushViewController(viewController, animated: animated)

@@ -75,6 +75,12 @@ extension UIColor {
 
         self.init(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: alpha)
     }
+
+    /// 将会失去alpha通道的数据
+    open var hexString: String {
+        let rgbColor = rgbaColor
+        return String(format: "#%02X%02X%02X", Int(rgbColor.red * 255), Int(rgbColor.green * 255), Int(rgbColor.blue * 255))
+    }
 }
 
 // MARK: - RGBA Color CGFloat

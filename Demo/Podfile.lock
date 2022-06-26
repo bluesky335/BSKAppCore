@@ -1,16 +1,35 @@
 PODS:
+  - BSKAppCore (1.0.0):
+    - BSKAppCore/BSKLog (= 1.0.0)
+    - BSKAppCore/BSKLogConsole (= 1.0.0)
+    - BSKAppCore/BSKUtils (= 1.0.0)
+    - SnapKit (~> 5.0.0)
+  - BSKAppCore/BSKLog (1.0.0):
+    - BSKAppCore/BSKUtils
+    - SnapKit (~> 5.0.0)
+  - BSKAppCore/BSKLogConsole (1.0.0):
+    - BSKAppCore/BSKLog
+    - SnapKit (~> 5.0.0)
+  - BSKAppCore/BSKUtils (1.0.0):
+    - SnapKit (~> 5.0.0)
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
+  - BSKAppCore (from `../BSKAppCore.podspec`)
   - SnapKit
 
 SPEC REPOS:
   trunk:
     - SnapKit
 
+EXTERNAL SOURCES:
+  BSKAppCore:
+    :path: "../BSKAppCore.podspec"
+
 SPEC CHECKSUMS:
+  BSKAppCore: 8459f5eb512ebae84d55af83e8f829822cca75a9
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 74408dc18ea7ebefa8777d671db8da42b7f3a03e
+PODFILE CHECKSUM: e00e2cafbcd40412ca02a1b4648054e08adc61b5
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
