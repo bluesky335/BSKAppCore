@@ -8,10 +8,14 @@
 import SnapKit
 import UIKit
 
+enum TableItem:String,CaseIterable {
+    case alertDemo
+}
+
 class ViewController: UIViewController {
     let tableView = UITableView()
     let topView = UIImageView()
-    let headerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 200))
+    let headerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,16 +55,25 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        return TableItem.allCases.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "xx"
+        cell.textLabel?.text = TableItem.allCases[indexPath.row].rawValue
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Section Header"
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let item = TableItem.allCases[indexPath.row]
+        switch item {
+        case .alertDemo:
+            self.navigationController?.pushViewController(ShowAlertDemoController(), animated: true)
+        }
     }
 }
