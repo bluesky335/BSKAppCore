@@ -5,8 +5,7 @@
 //  Created by 刘万林 on 2022/8/22.
 //
 
-import Foundation
-
+import UIKit
 /// 构建一个 UIAlertController
 /// - Parameters:
 ///   - title: 标题
