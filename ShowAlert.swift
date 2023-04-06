@@ -17,6 +17,7 @@ public func BuildAlert(title: String?, message: String, style: UIAlertController
     return AlertBuilder(title: title, message: message, style: style)
 }
 
+/// 快捷构建UIAlertController弹窗的工具类
 public class AlertBuilder {
     public struct AlertResult: Equatable {
         public let name: String
@@ -60,16 +61,21 @@ public class AlertBuilder {
         actions.append((title, style, result))
         return self
     }
-
-    public func okAction(title: String) -> AlertBuilder {
-        return addAction(title: title, style: .default, result: .ok)
+    
+    /// 添加OK选项
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - style: 样式，默认 .cancel
+    /// - Returns: 返回 Builder
+    public func addOkAction(title: String, style: UIAlertAction.Style = .cancel) -> AlertBuilder {
+        return addAction(title: title, style: style, result: .ok)
     }
 
-    public func cancelAction(title: String) -> AlertBuilder {
-        return addAction(title: title, style: .cancel, result: .cancel)
+    public func addCancelAction(title: String, style: UIAlertAction.Style = .cancel) -> AlertBuilder {
+        return addAction(title: title, style: style, result: .cancel)
     }
 
-    public func destructiveAction(title: String, style: UIAlertAction.Style = .destructive) -> AlertBuilder {
+    public func addDestructiveAction(title: String, style: UIAlertAction.Style = .destructive) -> AlertBuilder {
         return addAction(title: title, style: .destructive, result: .destructive)
     }
 

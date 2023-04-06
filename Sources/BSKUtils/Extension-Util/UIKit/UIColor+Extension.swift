@@ -77,7 +77,7 @@ extension UIColor {
     }
 
     /// 将会失去alpha通道的数据
-    open var hexString: String {
+    public var hexString: String {
         let rgbColor = rgbaColor
         return String(format: "#%02X%02X%02X", Int(rgbColor.red * 255), Int(rgbColor.green * 255), Int(rgbColor.blue * 255))
     }

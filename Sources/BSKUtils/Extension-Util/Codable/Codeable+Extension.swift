@@ -41,7 +41,7 @@ extension Decodable {
             let error = NSError(code: -1, message: "Json 解码失败")
             throw error
         }
-        return try JSONDecoder().decode(Self.self, from: data)
+        return try decode(fromData: data)
     }
 }
 

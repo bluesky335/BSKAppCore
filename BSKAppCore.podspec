@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name    = 'BSKAppCore'
-  s.version = '1.0.0'
+  s.version = '0.1.2'
   s.summary = 'An APP base Framework to help me start a project quickly.'
 
   s.description = <<-DESC 
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
     'JsonFiles' => ["Sources/BSKAppCore/**/*.json"]
   }
 
-  s.dependency 'SnapKit', '~> 5.0.0'
+  s.dependency 'SnapKit', '~> 5.6.0'
 
   s.public_header_files = ["Sources/BSKAppCore.h"]
   s.requires_arc = true

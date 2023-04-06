@@ -35,9 +35,9 @@ class ShowAlertDemoController: BSKViewController {
 
     @objc func alertAction(_ action: UIAction) {
         BuildAlert(title: "提示", message: "消息", style: .alert)
-            .okAction(title: "👌")
-            .cancelAction(title: "❌")
-            .destructiveAction(title: "⚠️")
+            .addOkAction(title: "👌")
+            .addCancelAction(title: "❌")
+            .addDestructiveAction(title: "⚠️")
             .onOK {
                 print("callBack:👌")
             }.onCancel {
@@ -50,9 +50,9 @@ class ShowAlertDemoController: BSKViewController {
     @objc func alertAsyncAction(_ action: UIAction) {
         Task {
             let result = await BuildAlert(title: "提示", message: "消息", style: .alert)
-                .okAction(title: "👌")
-                .cancelAction(title: "❌")
-                .destructiveAction(title: "⚠️")
+                .addOkAction(title: "👌")
+                .addCancelAction(title: "❌")
+                .addDestructiveAction(title: "⚠️")
                 .onOK {
                     print("callBack:👌")
                 }.onCancel {

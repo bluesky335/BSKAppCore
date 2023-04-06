@@ -22,7 +22,7 @@ let package = Package(
         .library(name: "BSKLogConsole", targets: ["BSKLogConsole"]),
     ],
     dependencies:[
-        .package(name:"SnapKit",url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1"))
+        .package(name:"SnapKit",url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.6.0"))
     ],
     targets: [
         .target(name: "BSKAppCore",

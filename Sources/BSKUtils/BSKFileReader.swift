@@ -87,7 +87,7 @@ open class BSKFileReader {
 }
 
 extension BSKFileReader : Sequence {
-    open func makeIterator() -> AnyIterator<String> {
+    public func makeIterator() -> AnyIterator<String> {
         return AnyIterator {
             return self.nextLine()
         }
