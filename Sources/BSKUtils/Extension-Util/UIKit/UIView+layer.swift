@@ -122,7 +122,7 @@ extension UIView {
     ///   - opacity: 透明度
     ///   - radius: 半径
     ///   - offset: 偏移
-    func addShadow(color: UIColor, opacity: Float, radius: CGFloat, offset: CGSize) {
+    public func addShadow(color: UIColor, opacity: Float, radius: CGFloat, offset: CGSize) {
         shadowColor = color
         shadowOpacity = opacity
         shadowRadius = radius
