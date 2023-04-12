@@ -106,7 +106,7 @@ public class AlertBuilder {
         showWith(callback: nil)
     }
 
-    private func showWith(callback: ((AlertResult) -> Void)?) {
+    func showWith(callback: ((AlertResult) -> Void)?) {
         let vc = UIAlertController(title: title, message: message, preferredStyle: style)
         for item in actions {
             vc.addAction(UIAlertAction(title: item.title, style: item.style, handler: {  _ in
