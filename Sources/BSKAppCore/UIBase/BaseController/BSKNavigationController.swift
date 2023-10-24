@@ -9,7 +9,15 @@ import UIKit
 
 /// 基础导航控制器
 /// 提供返回手势拦截控制等功能
-open class BSKNavigationController: UINavigationController {
+open class BSKNavigationController: UINavigationController, PopupableType {
+    
+    public var popupConfig: PopupConfig = {
+        var config = PopupConfig()
+        config.layout = .center(size: .init(width:300, height: 400))
+        config.cornerRadio = 20
+        return config
+    }()
+    
     /// 协议代理，将代理事件分发到多个地方
     private var delegateProxy = ProxyUINavigationControllerDelegate()
 
@@ -33,7 +41,7 @@ open class BSKNavigationController: UINavigationController {
             return super.popViewController(animated: animated)
         } else {
             // 通知已经阻止返回
-            (topViewController)?.didRejectPopBack()
+            topViewController?.didRejectPopBack()
         }
         return nil
     }
@@ -136,8 +144,8 @@ open class BSKNavigationController: UINavigationController {
     override open var childForStatusBarHidden: UIViewController? {
         return topViewController
     }
-    
-    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return self.topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
     }
 
@@ -195,7 +203,7 @@ extension BSKNavigationController: UINavigationControllerDelegate {
             popComplateCallBack.removeValue(forKey: hash)
         }
         viewControllers.removeAll { [weak self] vc in
-            return vc.removeSelfAfterPush() && vc != self?.topViewController
+            vc.removeSelfAfterPush() && vc != self?.topViewController
         }
     }
 }

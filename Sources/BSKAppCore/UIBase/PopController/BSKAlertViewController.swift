@@ -12,8 +12,8 @@ import UIKit
 #endif
 
 /// 定义Alert弹框的按钮
-class AlertAction {
-    enum Style: Int {
+public class BSKAlertAction {
+    public enum Style: Int {
         case `default` = 0
         case cancel = 1
         case destructive = 2
@@ -22,50 +22,53 @@ class AlertAction {
     /// 标题
     private(set) var title: String
     /// 类型
-    private(set) var style: AlertAction.Style
+    private(set) var style: BSKAlertAction.Style
     /// 按钮
-    private(set) var button: UIButton
+    private(set) var button: BSKButton
     /// 回调
-    private var handler: ((AlertAction) -> Void)?
+    private var handler: ((BSKAlertAction) -> Void)?
     /// 所属的控制器
-    fileprivate weak var alertVC: AlertViewController?
+    fileprivate weak var alertVC: BSKAlertController?
 
     /// 初始化
     /// - Parameters:
     ///   - title: 标题
     ///   - style: 类型
     ///   - handler: 回调
-    init(title: String, style: AlertAction.Style, handler: ((AlertAction) -> Void)? = nil) {
+    public init(title: String, style: BSKAlertAction.Style, handler: ((BSKAlertAction) -> Void)? = nil) {
         self.title = title
         self.style = style
-        button = BSKButton()
+        let actionButton = BSKButton(type: .custom)
+        button = actionButton
         if style == .destructive {
-            button.setTitleColor(.systemRed, for: .normal)
+            actionButton.setTitleColor(.systemRed, for: .normal)
         } else {
-            button.setTitleColor(.systemBlue, for: .normal)
+            actionButton.setTitleColor(.systemBlue, for: .normal)
         }
         if style == .cancel {
-            button.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
+            actionButton.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
         } else {
-            button.titleLabel?.font = .systemFont(ofSize: 17)
+            actionButton.titleLabel?.font = .systemFont(ofSize: 17)
         }
-        button.setTitle(title, for: .normal)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        actionButton.setBackgroundColor(.systemGray3, for: .highlighted)
+        actionButton.setTitleColor(.gray, for: .highlighted)
+        actionButton.setTitle(title, for: .normal)
+        actionButton.addTarget(self, action: #selector(buttonAction(button:)), for: .touchUpInside)
     }
 
     /// 按钮事件
-    @objc private func buttonAction() {
-        handler?(self)
-        alertVC?.dismiss(animated: true, completion: nil)
+    @objc private func buttonAction(button: BSKButton) {
+        alertVC?.dismiss(animated: true) { [unowned self] in
+            self.handler?(self)
+        }
     }
 }
 
-class AlertViewController: BSKViewController, PopupableType {
-    
-    var popupConfig = PopupConfig()
-    
+public class BSKAlertController: BSKViewController, PopupableType {
+    public lazy var popupConfig = PopupConfig()
+
     /// 类型
-    enum Style: Int {
+    public enum Style: Int {
         case actionSheet = 0
         case alert = 1
     }
@@ -77,13 +80,13 @@ class AlertViewController: BSKViewController, PopupableType {
     /// 消息
     open var message: String?
     /// 类型
-    open private(set) var preferredStyle: AlertViewController.Style = .alert
+    open private(set) var preferredStyle: BSKAlertController.Style = .alert
     /// 按钮
-    open private(set) var actions: [AlertAction] = []
+    open private(set) var actions: [BSKAlertAction] = []
     /// 分割线颜色
     open var seperatorColor = UIColor(light: .lightGray, dark: .gray)
     /// 背景颜色
-    open var backgroundColor: UIColor = UIColor(light: .red, dark: UIColor(red: 0.12, green: 0.12, blue: 0.12, alpha: 1)).withAlphaComponent(0.1)
+    open var backgroundColor: UIColor = UIColor(light: .white, dark: UIColor(red: 0.12, green: 0.12, blue: 0.12, alpha: 1)).withAlphaComponent(0.6)
     /// 背景 Effect
     open var backgroundEfect: UIVisualEffect = UIBlurEffect(style: .regular)
     /// 滚动时最大可见的按钮数量，可以是小数
@@ -131,8 +134,7 @@ class AlertViewController: BSKViewController, PopupableType {
     }()
 
     private lazy var contentScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-
+        let scrollView = BSKScrolView()
         contentGroupView.contentView.addSubview(scrollView)
         scrollView.alwaysBounceVertical = false
         scrollView.snp.makeConstraints { make in
@@ -143,7 +145,8 @@ class AlertViewController: BSKViewController, PopupableType {
     }()
 
     private lazy var actionsScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
+        let scrollView = BSKScrolView()
+        scrollView.delaysContentTouches = false
         contentGroupView.contentView.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(actionsScrollViewLayoutGuide)
@@ -177,7 +180,7 @@ class AlertViewController: BSKViewController, PopupableType {
     ///   - title: 标题
     ///   - message: 消息
     ///   - preferredStyle: 类型
-    public convenience init(title: String?, message: String?, preferredStyle: AlertViewController.Style) {
+    public convenience init(title: String?, message: String?, preferredStyle: BSKAlertController.Style) {
         self.init()
         self.title = title
         self.message = message
@@ -218,10 +221,11 @@ class AlertViewController: BSKViewController, PopupableType {
         }
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         let contentGroupView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
-        contentGroupView.layer.cornerRadius = 15
+        contentGroupView.layer.cornerRadius = 12
+        view.backgroundColor = .clear
         contentGroupView.layer.masksToBounds = true
         contentGroupView.contentView.backgroundColor = backgroundColor
         self.contentGroupView = contentGroupView
@@ -263,11 +267,11 @@ class AlertViewController: BSKViewController, PopupableType {
     }
 
     private func setupTitle() {
-        if let titleLabel = self.titleLabel {
+        if let titleLabel = titleLabel {
             contentScrollViewContent.addSubview(titleLabel)
             titleLabel.snp.makeConstraints({ make in
-                make.top.equalTo(titleLayoutGuide).inset(5)
-                make.left.right.equalTo(titleLayoutGuide).inset(20)
+                make.top.equalTo(titleLayoutGuide).inset(10)
+                make.left.right.equalTo(titleLayoutGuide).inset(10)
                 make.bottom.equalTo(titleLayoutGuide)
                 make.bottom.lessThanOrEqualTo(contentScrollViewContent).offset(-10)
             })
@@ -275,11 +279,11 @@ class AlertViewController: BSKViewController, PopupableType {
     }
 
     private func setupMessage() {
-        if let messageLabel = self.messageLabel {
+        if let messageLabel = messageLabel {
             contentScrollViewContent.addSubview(messageLabel)
             messageLabel.snp.makeConstraints({ make in
-                make.left.bottom.right.equalTo(messageLayoutGuide).inset(20)
-                make.top.equalTo(messageLayoutGuide)
+                make.left.bottom.right.equalTo(messageLayoutGuide).inset(10)
+                make.top.equalTo(messageLayoutGuide).inset(10)
                 make.top.greaterThanOrEqualTo(contentScrollViewContent).offset(10)
             })
         }
@@ -383,8 +387,8 @@ class AlertViewController: BSKViewController, PopupableType {
     }
 
     private func setupActionSheetActions() {
-        var normalActions: [AlertAction] = []
-        var cancellActions: [AlertAction] = []
+        var normalActions: [BSKAlertAction] = []
+        var cancellActions: [BSKAlertAction] = []
         actions.forEach { action in
             if action.style == .cancel {
                 cancellActions.append(action)
@@ -480,10 +484,7 @@ class AlertViewController: BSKViewController, PopupableType {
         }
     }
 
-    open func addAction(_ action: AlertAction) {
+    open func addAction(_ action: BSKAlertAction) {
         actions.append(action)
-    }
-
-    open func addTextField(configurationHandler: ((UITextField) -> Void)? = nil) {
     }
 }

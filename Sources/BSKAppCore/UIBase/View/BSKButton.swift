@@ -32,7 +32,7 @@ open class BSKButton: UIButton {
 
     open func setTitleFount(_ fount: UIFont, for state: UIControl.State) {
         fontDic[state.rawValue] = fount
-        checkState()
+        stateDidChange(animated: false)
     }
 
     open func titleFont(for state: UIControl.State) -> UIFont? {
@@ -44,20 +44,20 @@ open class BSKButton: UIButton {
         if bgColorDic[UIControl.State.normal.rawValue] == nil {
             bgColorDic[UIControl.State.normal.rawValue] = backgroundColor
         }
-        checkState()
+        stateDidChange(animated: false)
     }
 
     open func backgroundColor(for state: UIControl.State) -> UIColor? {
         return bgColorDic[state.rawValue]
     }
 
-    private func checkState(animated: Bool = false) {
+    private func stateDidChange(animated: Bool = true) {
         let updateStatue = { () -> Void in
-            self.titleLabel?.font = self.fontDic[self.state.rawValue] ?? self.fontDic[UIControl.State.normal.rawValue]
+            self.titleLabel?.font = self.fontDic[self.state.rawValue] ?? self.fontDic[UIControl.State.normal.rawValue] ?? self.titleLabel?.font
             super.backgroundColor = self.bgColorDic[self.state.rawValue] ?? self.bgColorDic[UIControl.State.normal.rawValue]
         }
         if animated {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.2) {
                 updateStatue()
             }
         } else {
@@ -68,6 +68,9 @@ open class BSKButton: UIButton {
     open override var backgroundColor: UIColor? {
         set {
             self.bgColorDic[UIControl.State.normal.rawValue] = newValue
+            if let newColor = newValue, self.bgColorDic[UIControl.State.highlighted.rawValue] == nil {
+                self.bgColorDic[UIControl.State.highlighted.rawValue] = newColor.with(alpha: newColor.rgbaColor.alpha * 0.5)
+            }
             super.backgroundColor = newValue
         }
         get {
@@ -77,37 +80,48 @@ open class BSKButton: UIButton {
 
     override open var isSelected: Bool {
         didSet {
-            self.checkState()
+            if !isTouchInside {
+                self.stateDidChange()
+            }
         }
     }
 
     override open var isHighlighted: Bool {
         didSet {
-            self.checkState()
+            if !isTouchInside {
+                self.stateDidChange()
+            }
         }
     }
 
     override open var isEnabled: Bool {
         didSet {
-            self.checkState()
+            if !isTouchInside {
+                self.stateDidChange()
+            }
         }
     }
 
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        checkState(animated: true)
+        stateDidChange(animated: false)
     }
 
     override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        checkState(animated: true)
+        stateDidChange(animated: true)
     }
 
     override open func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        checkState(animated: true)
+        stateDidChange(animated: true)
     }
 
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        stateDidChange(animated: true)
+    }
+    
     open func setTapAction(_ action: @escaping (BSKButton) -> Void) {
         tapAction = action
     }

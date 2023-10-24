@@ -38,11 +38,12 @@ extension UIViewController {
     ///   - viewControllerToPresent: 要显示的控制器
     ///   - config: 弹窗配置
     ///   - completion: 完成回调
-    public func popupPresent<ViewControllerType>(_ viewControllerToPresent: ViewControllerType, animated: Bool, completion: (() -> Void)?) where ViewControllerType: UIViewController, ViewControllerType: PopupableType {
+    public func popupPresent<ViewControllerType>(_ viewControllerToPresent: ViewControllerType, animated: Bool, completion: (() -> Void)? = nil) where ViewControllerType: UIViewController, ViewControllerType: PopupableType {
         let popupController = PopupController(viewController: viewControllerToPresent, config: viewControllerToPresent.popupConfig)
         viewControllerToPresent.modalPresentationStyle = .custom
         viewControllerToPresent.popupController = popupController
         viewControllerToPresent.transitioningDelegate = popupController
+        viewControllerToPresent.modalPresentationCapturesStatusBarAppearance = true
         present(viewControllerToPresent, animated: animated, completion: completion)
     }
 
@@ -51,7 +52,7 @@ extension UIViewController {
     ///   - viewControllerToPresent: 要显示的视图
     ///   - config: 弹窗配置
     ///   - completion: 完成回调
-    public func popupPresent<ViewType>(_ viewToPresent: ViewType, animated: Bool, completion: (() -> Void)?) where ViewType: UIView, ViewType: PopupableType {
+    public func popupPresent<ViewType>(_ viewToPresent: ViewType, animated: Bool, completion: (() -> Void)? = nil) where ViewType: UIView, ViewType: PopupableType {
         let vc = PopupViewController<ViewType>(popupView: viewToPresent)
         popupPresent(vc, animated: animated, completion: completion)
     }
@@ -82,18 +83,22 @@ public struct PopupConfig {
     /// 是否填充安全区域，当layout 为 custom 时无效，默认true
     public var fillSafeArea = true
     /// 是否打开点击遮罩区域来隐藏视图，默认false
-    public var allowDismissByTapDimmingView: Bool = true
+    public var allowDismissByTapDimmingView: Bool = false
     /// 是否允许使用滑动手势来隐藏视图默认false
-    public var allowDismissByPanGesture: Bool = true
-
+    public var allowDismissByPanGesture: Bool = false
+    /// 弹窗圆角
+    public var cornerRadio: CGFloat?
+    /// 弹窗圆角遮罩 默认全部
+    public var cornerMask: CACornerMask = [.layerMinXMinYCorner,
+                                           .layerMaxXMinYCorner,
+                                           .layerMinXMaxYCorner,
+                                           .layerMaxXMaxYCorner]
     /// dismiss动画参数
-    public var animationForDismiss: PopControllerAnimation.Animation = .init(duration: 0.3, type: .fade, options: [.curveLinear])
-    
+    public var animationForDismiss: PopControllerAnimation.Animation = .init(duration: 0.2, type: .fade, options: [.curveLinear])
     /// dismiss手势动画参数
     public var animationForDismissByGesture: PopControllerAnimation.Animation?
-
     /// present动画参数
-    public var animationForPresent: PopControllerAnimation.Animation = .init(duration: 0.3, type: .enlarge, options: [.curveEaseInOut])
+    public var animationForPresent: PopControllerAnimation.Animation = .init(duration: 0.2, type: .enlarge, options: [.curveEaseInOut])
 
     /// 自定义遮罩视图，默认为透明度为0.3的黑色UIView
     /// 可以是任何UIView的子类,设置为nil即为不显示遮罩视图，此时不会遮挡父级控制器，父级控制器可操作。
@@ -162,6 +167,11 @@ class PopupController: NSObject {
         }
         presentedAnimation = .init(animation: config.animationForPresent, direction: .present)
         self.config = config
+        
+        if let radio = config.cornerRadio {
+            viewController.view.cornerRadius = radio
+            viewController.view.maskedCorners = config.cornerMask
+        }
         super.init()
     }
 
@@ -288,10 +298,10 @@ extension PopupController: UIGestureRecognizerDelegate {
         }
         guard let otherView = otherGestureRecognizer.view as? UIScrollView,
               otherView.bounces == false,
-              self.viewController.view.subviews.contains(otherView) else {
+              viewController.view.subviews.contains(otherView) else {
             return false
         }
-        switch self.dismissedAnimation.animationParameters.type {
+        switch dismissedAnimation.animationParameters.type {
         case .left:
             return otherView.contentOffset.x == otherView.contentSize.width - otherView.frame.width
         case .right:
@@ -360,10 +370,10 @@ private class PopPresentationController: UIPresentationController {
     }
 
     override open func presentationTransitionWillBegin() {
-        guard let containerView = self.containerView else {
+        guard let containerView = containerView else {
             return
         }
-        if let dimmingView = self.dimmingView {
+        if let dimmingView = dimmingView {
             dimmingView.translatesAutoresizingMaskIntoConstraints = false
             containerView.insertSubview(dimmingView, at: 0)
             dimmingView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
@@ -395,7 +405,7 @@ private class PopPresentationController: UIPresentationController {
     }
 
     override open func dismissalTransitionWillBegin() {
-        if let dimmingView = self.dimmingView {
+        if let dimmingView = dimmingView {
             if let efectView = dimmingView as? UIVisualEffectView {
                 guard let coordinator = presentedViewController.transitionCoordinator else {
                     efectView.effect = nil

@@ -20,13 +20,13 @@ extension UIImage {
 
      - Returns 新的图片
      */
-    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 10, height: 10)) {
+    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 10, height: 10), cornerRadius: CGFloat = 0) {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
 
         let context = UIGraphicsGetCurrentContext()
         context?.setFillColor(color.cgColor)
-        context?.fill(rect)
+        UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).fill()
 
         self.init(cgImage: (UIGraphicsGetImageFromCurrentImageContext()?.cgImage!)!)
         UIGraphicsEndImageContext()

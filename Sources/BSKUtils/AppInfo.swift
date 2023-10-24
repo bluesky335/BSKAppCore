@@ -1,6 +1,6 @@
 //
 //  AppInfo.swift
-//  
+//
 //
 //  Created by 刘万林 on 2022/2/16.
 //
@@ -9,25 +9,63 @@ import UIKit
 
 // 应用相关信息
 public struct AppInfo {
-    private init() {}
+    public static let localized = AppInfo(localized: true)
+
+    private static let `default` = AppInfo()
+
+    private var localized: Bool
+
+    private init(localized: Bool = false) {
+        self.localized = localized
+    }
+
+    private var infoDictionary: [String: Any]? {
+        if localized {
+            return Bundle.main.localizedInfoDictionary ?? Bundle.main.infoDictionary
+        } else {
+            return Bundle.main.infoDictionary
+        }
+    }
+
+    /// 版本号
+    public var shortVersion: String {
+        return (infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+    }
+
+    /// App名称
+    public var bundleName: String {
+        return (infoDictionary?[String(kCFBundleNameKey)] as? String) ?? ""
+    }
+
+    /// App名称
+    public var displayName: String {
+        return (infoDictionary?[String("CFBundleDisplayName")] as? String) ?? ""
+    }
+
+    /// build version
+    public var buildVersion: String {
+        return (infoDictionary?[String(kCFBundleVersionKey)] as? String) ?? ""
+    }
+
+    // default
     /// 版本号
     public static var shortVersion: String {
-        return (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+        return self.default.shortVersion
     }
 
     /// App名称
     public static var bundleName: String {
-        return (Bundle.main.infoDictionary?[String(kCFBundleNameKey)] as? String) ?? ""
+        return self.default.bundleName
     }
 
     /// App名称
     public static var displayName: String {
-        return (Bundle.main.infoDictionary?[String("CFBundleDisplayName")] as? String) ?? ""
+        return self.default.displayName
     }
 
     /// build version
     public static var buildVersion: String {
-        return (Bundle.main.infoDictionary?[String(kCFBundleVersionKey)] as? String) ?? ""
+        return self.default.buildVersion
     }
 }
 
