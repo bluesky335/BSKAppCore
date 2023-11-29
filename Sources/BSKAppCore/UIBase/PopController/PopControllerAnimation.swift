@@ -26,10 +26,16 @@ extension UIViewController {
 
     private var popupController: PopupController? {
         set {
-            objc_setAssociatedObject(self, &UIViewController.popupControllerKey, newValue, .OBJC_ASSOCIATION_RETAIN)
+            withUnsafePointer(to: UIViewController.popupControllerKey) { p in
+                objc_setAssociatedObject(self, p, newValue, .OBJC_ASSOCIATION_RETAIN)
+            }
         }
         get {
-            objc_getAssociatedObject(self, &UIViewController.popupControllerKey) as? PopupController
+            var vc: PopupController?
+            withUnsafePointer(to: UIViewController.popupControllerKey) { p in
+                vc = objc_getAssociatedObject(self, p) as? PopupController
+            }
+            return vc
         }
     }
 
@@ -167,7 +173,7 @@ class PopupController: NSObject {
         }
         presentedAnimation = .init(animation: config.animationForPresent, direction: .present)
         self.config = config
-        
+
         if let radio = config.cornerRadio {
             viewController.view.cornerRadius = radio
             viewController.view.maskedCorners = config.cornerMask

@@ -37,7 +37,7 @@ public class AlertBuilder {
     private(set) var message: String?
     private(set) var style: UIAlertController.Style
 
-    init(title: String?, message: String?, style: UIAlertController.Style) {
+    public init(title: String?, message: String?, style: UIAlertController.Style) {
         self.title = title
         self.message = message
         self.style = style
