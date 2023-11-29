@@ -13,7 +13,7 @@ open class BSKImagePreview: UIScrollView {
         set {
             imageView.image = newValue
             if frame != .zero {
-                perform(#selector(updateImageSize), with: nil, afterDelay: 0)
+                updateImageSize()
             }
         }
         get {
@@ -57,9 +57,11 @@ open class BSKImagePreview: UIScrollView {
         let x_scale = frame.size.width / imageSize.width
         let y_scale = frame.size.height / imageSize.height
         let scale = x_scale < y_scale ? x_scale : y_scale
-        initialZoomScale = max(minimumZoomScale, min(1, scale))
+        initialZoomScale =  min(1, scale)
+        minimumZoomScale = scale * 0.2
         zoomScale = initialZoomScale
         initialCenter = imageView.center
+        scrollViewDidZoom(self)
     }
     public override func layoutSubviews() {
         super.layoutSubviews()
