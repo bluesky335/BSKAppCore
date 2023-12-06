@@ -26,7 +26,7 @@ open class BSKImagePreview: UIScrollView {
 
     public private(set) var imageView = UIImageView()
 
-    public override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(imageView)
         delegate = self
@@ -36,34 +36,39 @@ open class BSKImagePreview: UIScrollView {
         alwaysBounceHorizontal = true
     }
 
-    required public init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
         delegate = self
     }
 
     @objc private func updateImageSize() {
-        let imageSize = image?.size ?? CGSize(width: 1, height: 1)
+        maximumZoomScale = 5
+        minimumZoomScale = 0.2
+
+        var imageSize = image?.size ?? CGSize(width: 1, height: 1)
         let srollHeight = frame.height - safeAreaInsets.vertical
         let srollWidth = frame.width - safeAreaInsets.horizontal
 
-        let x = imageSize.width < srollWidth ? (srollWidth - imageSize.width) / 2 : 0
-        let y = imageSize.height < srollHeight ? (srollHeight - imageSize.height) / 2 : 0
         if imageSize.width < srollWidth,
            imageSize.height < srollHeight {
             minimumZoomScale = 1
         }
 
-        imageView.frame = CGRect(x: x, y: y, width: imageSize.width, height: imageSize.height)
-        let x_scale = frame.size.width / imageSize.width
-        let y_scale = frame.size.height / imageSize.height
+        let x_scale = srollWidth / imageSize.width
+        let y_scale = srollHeight / imageSize.height
         let scale = x_scale < y_scale ? x_scale : y_scale
-        initialZoomScale =  min(1, scale)
-        minimumZoomScale = scale * 0.2
-        zoomScale = initialZoomScale
+        imageSize = .init(width: imageSize.width * scale, height: imageSize.height * scale)
+
+        let x = imageSize.width < srollWidth ? (srollWidth - imageSize.width) / 2 : 0
+        let y = imageSize.height < srollHeight ? (srollHeight - imageSize.height) / 2 : 0
+        imageView.frame = CGRect(x: x, y: y, width: imageSize.width, height: imageSize.height)
+        zoomScale = 1
+        initialZoomScale = 1
         initialCenter = imageView.center
         scrollViewDidZoom(self)
     }
-    public override func layoutSubviews() {
+
+    override public func layoutSubviews() {
         super.layoutSubviews()
         if imageView.frame == .zero {
             updateImageSize()

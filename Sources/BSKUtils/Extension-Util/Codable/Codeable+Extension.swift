@@ -14,6 +14,14 @@ extension Decodable {
     /// - Throws: 数据错误时抛出错误
     /// - Returns: 返回解码后的对象
     public static func decode(from ajson: Any) throws -> Self {
+        if ajson is NSNull {
+            let r:Any? = nil
+            if let x = r as? Self {
+                return x
+            } else {
+                throw NSError(code: -1, message: "decode failed with NSNull")
+            }
+        }
         if let jsonStr = ajson as? String {
             return try decode(fromString: jsonStr)
         } else if let jsonData = ajson as? Data {

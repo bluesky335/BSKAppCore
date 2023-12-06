@@ -29,7 +29,7 @@ extension UIView {
         }
     }
 
-    @objc open var masksToBounds: Bool {
+    @IBInspectable @objc open var masksToBounds: Bool {
         get {
             return layer.masksToBounds
         }
