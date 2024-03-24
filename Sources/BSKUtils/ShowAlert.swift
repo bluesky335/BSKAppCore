@@ -60,7 +60,7 @@ public class AlertBuilder {
         actions.append((title, style, result))
         return self
     }
-    
+
     /// 添加OK选项
     /// - Parameters:
     ///   - title: 标题
@@ -94,26 +94,30 @@ public class AlertBuilder {
     }
 
     @MainActor
-    public func showForResult() async -> AlertResult {
+    public func showForResult(configVC:((UIAlertController)->Void)? = nil) async -> AlertResult {
         return await withCheckedContinuation { continueation in
-            showWith { result in
+           let vc = showWith { result in
                 continueation.resume(returning: result)
             }
+            configVC?(vc)
         }
     }
 
-    public func show() {
+    @discardableResult
+    public func show() -> UIAlertController {
         showWith(callback: nil)
     }
 
-    public func showWith(callback: ((AlertResult) -> Void)?) {
+    @discardableResult
+    public func showWith(callback: (@Sendable (AlertResult) -> Void)?) -> UIAlertController {
         let vc = UIAlertController(title: title, message: message, preferredStyle: style)
         for item in actions {
-            vc.addAction(UIAlertAction(title: item.title, style: item.style, handler: {  _ in
+            vc.addAction(UIAlertAction(title: item.title, style: item.style, handler: { _ in
                 self.onAction(result: item.result)
                 callback?(item.result)
             }))
         }
         UIApplication.shared.bsk.topViewController?.present(vc, animated: true)
+        return vc
     }
 }
